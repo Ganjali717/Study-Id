@@ -1,0 +1,55 @@
+﻿@model string
+@using StudyId.WebApplication.Extensions
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_InsideLayout.cshtml";
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        var returnUrl = @Html.ToJson(Model);
+    </script>
+    <script src="/js/controllers/auth/vue-auth-login.js" type="module"></script>
+}
+<div id="login-app" class="contact__row2 align-middle" style="margin-top:10%">
+    <div class="contact__form-wrap">
+        <div class="form__title">
+            Login form
+        </div>
+        <div class="form__subtitle">
+            Please, input your login and password.
+        </div>
+        <div class="form__items">
+            <div class="form__item">
+                <!-- <input autocomplete="off" type="text" name="login" data-error="Error" placeholder="Login*" class="input form__input error"> -->
+                <input autocomplete="off" type="text" name="UserName" data-error="Error" placeholder="Email*" class="input form__input" v-model.trim="$v.username.$model">
+
+                <div class="error form__error" v-if="$v.username.$error && !$v.username.required">
+                    This field is required
+                </div>
+                <div class="error form__error" v-if="$v.username.$error && !$v.username.email">
+                    This field is in the wrong format
+                </div>
+            </div>
+            <div class="form__item">
+                <input autocomplete="off" type="password" name="Password" data-error="Error" placeholder="Password*" class="input form__input" v-model.trim="$v.password.$model">
+
+                <div class="error form__error" v-if="$v.password.$error && !$v.password.required">
+                    This field is required
+                </div>
+            </div>
+            <div class="form__item" v-if="error!=null && error!=''">
+                <div class="alert alert-danger">{{error}}</div>
+            </div>
+            <button class="button form__button" v-on:click="signIn();" v-bind:disabled="loader">
+                <span class="spinner-border spinner-border-sm text-light m-1" v-if="loader"></span>
+                <span><i class="fa-solid fa-arrow-right-to-arc" v-if="!loader"></i> Login</span>
+            </button>
+            <div class="form__item">
+                <a href="/auth/forgot" class="icon-button">Forgot Password</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+

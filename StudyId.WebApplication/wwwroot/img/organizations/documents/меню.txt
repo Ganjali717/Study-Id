@@ -1,0 +1,200 @@
+<response><result code="0" menu-version="1268414">
+<service id="457" code="null" name="null" order="0" processingType="Online" commission="0 %" hotkey="0" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="456" code="null" name="null" order="0" processingType="Online" commission="0 %" hotkey="0" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<folder id="10017" name="BÃ¼dcÉ™ Ã¶dÉ™niÅŸlÉ™ri" img="" order="0">
+<service id="623" code="623" name="Cari ildÉ™ fermer kabinetindÉ™n istifadÉ™ Ã¼Ã§Ã¼n xidmÉ™t haqqÄ± (asanpay)" order="0" processingType="Offline" commission="0 %" maxsum="1500000" minsum="10" hotkey="0" handlerType="AdvancedProvider" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="561" code="561" name="Ð Ð°Ð±Ð¸Ñ‚Ð° - Ð²ÑÐµ ÑƒÑÐ»ÑƒÐ³Ð¸ Ð´Ð»Ñ ÑˆÐ»ÑŽÐ·Ð°" order="0" processingType="Offline" commission="0 %" maxsum="1500000" minsum="10" hotkey="0" handlerType="AdvancedProvider" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+</folder>
+<folder id="10006" name="DiqÉ™r xidmÉ™tlÉ™r" img="raznoe.png" order="0">
+<service id="639" code="639" name="Azerpost-topup" order="0" processingType="Online" commission="0 %" maxsum="1000000" minsum="100" hotkey="0" handlerType="AdvancedProvider" receipt="azerpost_topup">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="502" code="502" name="Azsigorta" order="0" processingType="Offline" commission="0 %" maxsum="1500000" minsum="10" hotkey="0" handlerType="AdvancedProvider" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="487" code="487" name="Heyatfondu" order="0" processingType="Offline" commission="0 %" maxsum="1500000" minsum="100" hotkey="0" handlerType="AdvancedProvider" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="420" code="420" name="IMEI (old)" order="0" processingType="Offline" commission="0 %" maxsum="1000000" minsum="1" hotkey="0" handlerType="UniversalProvider" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="628" code="628" name="MerkuriBOKT" order="0" processingType="Offline" commission="0 %" maxsum="200000" minsum="10" hotkey="0" handlerType="AdvancedProvider" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="476" code="476" name="MCQS (IMEI)" img="other/imei_logo.png" order="0" processingType="Offline" commission="0 %" maxsum="500000" minsum="100" hotkey="0" handlerType="AdvancedProvider" receipt="imei">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="416" code="416" name="Rabita (Ð²ÑÐµ ÑƒÑÐ»ÑƒÐ³Ð¸)" order="0" processingType="Offline" commission="0 %" maxsum="200000" minsum="1" hotkey="0" handlerType="AdvancedProvider" receipt="rabita">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+</folder>
+<folder id="10003" name="Elektron vÉ™saitlÉ™r" img="emoney.png" order="0">
+<service id="403" code="403" name="CÃ¼zdan balansÄ±nÄ±n artÄ±rÄ±lmasÄ±" order="0" processingType="Offline" commission="0 %" maxsum="1000000" minsum="100" hotkey="0" handlerType="AdvancedProvider" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="192" code="192" name="ÐŸÐ¾Ð¿Ð¾Ð»Ð½ÐµÐ½Ð¸Ðµ ÐºÐ¾ÑˆÐµÐ»ÑŒÐºÐ°" img="1.png" order="1" processingType="Offline" commission="0 %" maxsum="100000" minsum="100" hotkey="0" handlerType="UniversalProvider" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+</folder>
+<folder id="10015" name="HÃ–P" img="" order="0">
+</folder>
+<service id="424" code="null" name="null" order="0" processingType="Online" commission="0 %" hotkey="0" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="426" code="null" name="null" order="0" processingType="Online" commission="0 %" hotkey="0" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<folder id="10016" name="NaxÃ§ivan qrup" img="" order="0">
+<service id="472" code="472" name="NaxcÄ±van - Ä°nternet" img="internet/nakhinternet.png" order="0" processingType="Offline" commission="0 %" maxsum="30000" minsum="100" hotkey="0" handlerType="AdvancedProvider" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="471" code="471" name="NaxTel 4G" img="nakh/naxtel.png" order="0" processingType="Offline" commission="0 %" maxsum="1500000" minsum="100" hotkey="0" handlerType="UniversalProvider" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="475" code="473" name="NaxÃ§ivan - Elektrik" img="nakh/naxelektrik.png" order="0" processingType="Offline" commission="0 %" maxsum="1000000" minsum="100" hotkey="0" handlerType="AdvancedProvider" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="474" code="474" name="NaxÃ§ivan - Qaz" img="nakh/naxqaz.png" order="0" processingType="Offline" commission="0 %" maxsum="1000000" minsum="100" hotkey="0" handlerType="AdvancedProvider" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="473" code="473" name="NaxÃ§ivan - Su" img="nakh/naxsu.png" order="0" processingType="Offline" commission="0 %" maxsum="1000000" minsum="100" hotkey="0" handlerType="AdvancedProvider" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="427" code="427" name="NaxÃ§Ä±van Telefon" img="stas_tel/naxcivan_poct.png" order="0" processingType="Offline" commission="0 %" maxsum="50000" minsum="100" hotkey="0" handlerType="AdvancedProvider" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="427" code="427" name="NaxÃ§Ä±van Telefon" img="stas_tel/naxcivan_poct.png" order="0" processingType="Offline" commission="0 %" maxsum="50000" minsum="100" hotkey="0" handlerType="AdvancedProvider" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+</folder>
+<folder id="10018" name="Sosial ÅŸÉ™bÉ™kÉ™lÉ™r" img="" order="0">
+</folder>
+<folder id="10009" name="Ð‘Ð»Ð°Ð³Ð¾Ñ‚Ð²Ð¾Ñ€Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ð¾ÑÑ‚ÑŒ" img="icon/group/charity.png" order="0">
+<folder id="10010" name="ÐŸÐ¾Ð¼Ð¾Ñ‰ÑŒ Ñ„Ð¸Ð·Ð¸Ñ‡ÐµÑÐºÐ¸Ð¼ Ð»Ð¸Ñ†Ð°Ð¼" img="" order="0">
+</folder>
+</folder>
+<folder id="10011" name="Ð˜Ð³Ñ€Ñ‹" img="games.png" order="0">
+<service id="599" code="599" name="SmartLotto" order="0" processingType="Offline" commission="0 %" maxsum="100000" minsum="100" hotkey="0" handlerType="AdvancedProvider" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="599" code="599" name="SmartLotto" order="0" processingType="Offline" commission="0 %" maxsum="100000" minsum="100" hotkey="0" handlerType="AdvancedProvider" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+</folder>
+<folder id="10012" name="Ð¡Ñ‚Ñ€Ð°Ñ…Ð¾Ð²Ð°Ð½Ð¸Ðµ" img="/groups/charity.png" order="0">
+<service id="625" code="625" name="BakiSigorta" order="0" processingType="Offline" commission="0 %" maxsum="200000" minsum="1" hotkey="0" handlerType="AdvancedProvider" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+</folder>
+<folder id="10001" name="Mobil Operatorlar" img="mobile.png" order="1">
+<service id="418" code="421" name="Azercell" img="azercell.png" order="0" processingType="Offline" commission="0 %" maxsum="30000" minsum="80" hotkey="0" handlerType="AdvancedProvider" receipt="mobile">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="193" code="193" name="Bakcell" img="mobile/bakcell.png" order="0" processingType="Offline" commission="0 %" maxsum="20000" minsum="100" hotkey="0" handlerType="UniversalProvider" receipt="mobile">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+</folder>
+<service id="366" code="null" name="null" order="1" processingType="Online" commission="0 %" hotkey="0" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<folder id="10004" name="Kommunal XidmÓ™tlÓ™r" img="komunal.png" order="2">
+<service id="589" code="589" name="AzÉ™rigas SMART NFC" order="0" processingType="Online" commission="0 %" maxsum="1500000" minsum="1" hotkey="0" handlerType="AdvancedProvider" receipt="azerigas">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="632" code="632" name="AzÉ™riqaz Ä°B NEW" order="0" processingType="Offline" commission="0 %" maxsum="1000000" minsum="10" hotkey="0" handlerType="AdvancedProvider" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="481" code="481" name="AzÉ™riÅŸÄ±q (Qeyri É™hali)" order="0" processingType="Offline" commission="0 %" maxsum="1500000" minsum="100" hotkey="0" handlerType="AdvancedProvider" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="415" code="415" name="AzÉ™riÅŸÄ±q (Æhali)" order="0" processingType="Offline" commission="0 %" maxsum="1500000" minsum="100" hotkey="0" handlerType="AdvancedProvider" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+</folder>
+<folder id="10002" name="Ä°nternet ProvayderlÓ™r" img="internet.png" order="3">
+<service id="2" code="401" name="AzDataCom" img="https://smartpay.az/pic/service/medium/internet/azdatacom.png" order="0" processingType="Offline" commission="0 %" maxsum="5000" minsum="100" hotkey="0" handlerType="AdvancedProvider" receipt="rabita">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="630" code="630" name="Azdatacom-yeni" order="0" processingType="Offline" commission="0 %" maxsum="100000" minsum="10" hotkey="0" handlerType="AdvancedProvider" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="484" code="484" name="Azeronline" order="0" processingType="Offline" commission="0 %" maxsum="5000" minsum="10" hotkey="0" handlerType="AdvancedProvider" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="509" code="509" name="AzFiberNet" order="0" processingType="Offline" commission="0 %" maxsum="1500000" minsum="10" hotkey="0" handlerType="AdvancedProvider" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="483" code="483" name="DataPlus" order="0" processingType="Offline" commission="0 %" maxsum="5000" minsum="10" hotkey="0" handlerType="AdvancedProvider" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="598" code="598" name="Flexnet" order="0" processingType="Offline" commission="0 %" maxsum="100000" minsum="100" hotkey="0" handlerType="AdvancedProvider" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="590" code="590" name="Linknet" order="0" processingType="Offline" commission="0 %" maxsum="200000" minsum="10" hotkey="0" handlerType="AdvancedProvider" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="601" code="590" name="Skylink" img="internet/skylink.png" order="0" processingType="Offline" commission="0 %" maxsum="200000" minsum="10" hotkey="0" handlerType="AdvancedProvider" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="587" code="587" name="Teleport" order="0" processingType="Offline" commission="0 %" maxsum="2000" minsum="10" hotkey="0" handlerType="AdvancedProvider" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="587" code="587" name="Teleport" order="0" processingType="Offline" commission="0 %" maxsum="2000" minsum="10" hotkey="0" handlerType="AdvancedProvider" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="470" code="470" name="TransEuroCom-Internet" order="0" processingType="Online" commission="0 %" maxsum="1000000" minsum="10" hotkey="0" handlerType="AdvancedProvider" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="600" code="600" name="Uninet/Dataplus" order="0" processingType="Offline" commission="0 %" maxsum="100000" minsum="100" hotkey="0" handlerType="AdvancedProvider" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="2" code="401" name="AzDataCom" img="https://smartpay.az/pic/service/medium/internet/azdatacom.png" order="1" processingType="Offline" commission="0 %" maxsum="5000" minsum="100" hotkey="0" handlerType="AdvancedProvider" receipt="rabita">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="6" code="401" name="AzEurotel internet" img="internet/azeurotel_int.png" order="1" processingType="Offline" commission="0 %" maxsum="5000" minsum="1" hotkey="0" handlerType="AdvancedProvider" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="3" code="401" name="AzGoldNet" order="1" processingType="Offline" commission="0 %" maxsum="50000" minsum="100" hotkey="0" handlerType="AdvancedProvider" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="5" code="401" name="Aztelecom.net" img="internet/aztelekom.png" order="1" processingType="Offline" commission="0 %" maxsum="5000" minsum="100" hotkey="0" handlerType="AdvancedProvider" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="4" code="401" name="Baktelecom.az" img="internet/bakinternet.png" order="1" processingType="Offline" commission="0 %" maxsum="5000" minsum="100" hotkey="0" handlerType="AdvancedProvider" receipt="rabita">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="584" code="584" name="SafCell Ñ‚ÐµÑÑ‚" img="1.png" order="3" processingType="Offline" commission="0 %" maxsum="1500000" minsum="100" hotkey="0" handlerType="AdvancedProvider" receipt="">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+</folder>
+<folder id="10005" name="TV ProvayderlÓ™r" img="sputnik.png" order="4">
+</folder>
+<folder id="10008" name="Stasionar telefonlar" img="" order="5">
+<service id="434" code="434" name="Catel" order="0" processingType="Offline" commission="0 %" maxsum="5000" minsum="10" hotkey="0" handlerType="AdvancedProvider" receipt="catel">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="469" code="469" name="Catel (MHM)" order="0" processingType="Offline" commission="0 %" maxsum="5000" minsum="10" hotkey="0" handlerType="AdvancedProvider" receipt="rabita">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="644" code="644" name="Rabita-general" order="0" processingType="Offline" commission="0 %" maxsum="200000" minsum="1" hotkey="0" handlerType="AdvancedProvider" receipt="rabita">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="7" code="401" name="AzEurotel" img="stas_tel/azeurotel_stas.png" order="1" processingType="Offline" commission="0 %" maxsum="5000" minsum="1" hotkey="0" handlerType="AdvancedProvider" receipt="rabita">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="8" code="8" name="Baktelecom/Aztelecom" img="stas_tel/btri.png" order="1" processingType="Offline" commission="0 %" maxsum="5000" minsum="1" hotkey="0" handlerType="AdvancedProvider" receipt="rabita">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+<service id="577" code="577" name="Ultel" order="4" processingType="Offline" commission="0 %" maxsum="1500000" minsum="1" hotkey="0" handlerType="AdvancedProvider" receipt="ultel">
+<commission-details mode="DIRECT" percent="0.0"/>
+<sources/></service>
+</folder>
+</result></response>

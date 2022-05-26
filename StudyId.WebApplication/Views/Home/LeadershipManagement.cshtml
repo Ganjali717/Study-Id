@@ -1,0 +1,160 @@
+﻿@{
+    ViewData["Title"] = "Leadership & Management - Students enrolled in this course will learn about human resources, management , project management, business operations, finance, worker health and safety, and sustainability.";
+    ViewData["Description"] = "Students enrolled in this course will learn about human resources, management , project management, business operations, finance, worker health and safety, and sustainability. This course provides students with the skills to plan and manage projects in the business world. The focus is on information technology and how it relates to various business projects.";
+    ViewData["Canonical"] = Url.Action("LeadershipManagement", "Home");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section MicroData{
+<script type="application/ld+json">
+    {
+      "@Html.Raw("@context")": "https://schema.org",
+      "@Html.Raw("@type")": "Course",
+      "name": "Leadership & Management",
+      "description": "Students enrolled in this course will learn about human resources, management , project management, business operations, finance, worker health and safety, and sustainability. This course provides students with the skills to plan and manage projects in the business world. The focus is on information technology and how it relates to various business projects.",
+      "provider": {
+        "@Html.Raw("@type")": "Organization",
+        "name": "Study Id",
+        "sameAs": "@Url.Action("LeadershipManagement")"
+      }
+    }
+</script>
+}
+<section class="course">
+    <div class="course__container">
+        <div class="course__breadcrumb breadcrumb">
+            <ul class="breadcrumb__list">
+                <li class="breadcrumb__item">
+                    <a href="@Url.Action("Index")" class="breadcrumb__link">Home </a>
+                </li>
+                <li class="breadcrumb__item">
+                    <a href="@Url.Action("Qualifications")" class="breadcrumb__link"> Оur Faculties </a>
+                </li>
+                <li class="breadcrumb__item">
+                    <span class="breadcrumb__current">
+                        Leadership & Management
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <div class="course__top-head top-head">
+            <a href="@Url.Action("Qualifications")" class="top-head__exit">
+                <img src="@Url.Content("/img/elements/arrow-left.svg")" alt="Icon" class="top-head__icon">
+            </a>
+            <h1 class="title course__title">
+                Leadership & Management
+            </h1>
+        </div>
+        <div class="course__top top-course">
+            <div class="top-course__row">
+                <div class="top-course__title">
+                    Leadership & Management
+                </div>
+                <div class="top-course__image-ibg">
+                    <picture><source srcset="@Url.Content("~/img/faculty/07.webp")" type="image/webp"><img src="@Url.Content("~/img/faculty/07.webp")" alt="Leadership & Management"></picture>
+                </div>
+            </div>
+            <div class="top-course__price price-course">
+                <a href="#contact-form" class="price-course__button button button_white">
+                    Аdmission process
+                </a>
+            </div>
+        </div>
+        <div class="course__text">
+            <p>
+                What makes a person a real leader? The matter is that leading features could be of good service for business. Very often it is not a manager but a leader who operates all the processes within the company.
+            </p>
+            <p>
+                In our leadership & management training programs, you may learn what has the biggest importance for a leader as well as practice all the knowledge you will get. You will be able start your leadership experience for the sake of your career growth as a result.
+            </p>
+            <p>
+                The course of leadership & management is a cross-science discipline that allows one to learn several important courses at once including:
+                <ul>
+                    <li>human resources,</li>
+                    <li>project management,</li>
+                    <li>business operations,,</li>
+                    <li>financial management,</li>
+                    <li>sustainability.</li>
+                </ul>
+                You will also study lots of other important things you may need to feel free in the business management as the process.
+            </p>
+            <p>
+                With our training programs, you can get the most acute knowledge and skills you may need in your future work both in Australia and in other countries. Be sure that your learning experience will come in handy with StudyID.
+            </p>
+        </div>
+        <div class="course__row">
+            <form class="contact__form form" id="contact-form">
+                <div class="alert alert-danger" v-if="error!=null && error!=''">{{error}}</div>
+                <div class="form__title">
+                    Request Your Free Online Assessment
+                </div>
+                <br />
+                <div class="form__items">
+                    <div class="form__item">
+                        <input type="text" name="firstname" data-error="Error" placeholder="First name*" class="input form__input" v-bind:disabled="loader" v-model="$v.firstName.$model" v-bind:class="{'error':$v.firstName.$error }" v-bind:disabled="loader" />
+                        <div class="error form__error" v-if="$v.firstName.$error && !$v.firstName.required">
+                            This field is required
+                        </div>
+                    </div>
+                    <div class="form__item">
+                        <input type="text" name="lastname" data-error="Error" placeholder="Last name*" class="input form__input" v-bind:disabled="loader" v-model="$v.lastName.$model" v-bind:class="{'error':$v.lastName.$error }" v-bind:disabled="loader" />
+                        <div class="error form__error" v-if="$v.lastName.$error && !$v.lastName.required">
+                            This field is required
+                        </div>
+                    </div>
+                    <div class="form__item">
+                        <input type="text" name="Email" data-error="Error" placeholder="Email*" class="input form__input" v-bind:disabled="loader" v-model="$v.email.$model" v-bind:class="{'error':$v.email.$error }" v-bind:disabled="loader" />
+                        <div class="error form__error" v-if="$v.email.$error && !$v.email.required">
+                            This field is required
+                        </div>
+                        <div class="error form__error" v-if="$v.email.$error && !$v.email.email">
+                            Wrong email format
+                        </div>
+                    </div>
+                    <div class="form__item">
+                        <v-select :options="courses" placeholder="Course of Interest" class="form__input" v-bind:disabled="loader" label="title" :reduce="item => item.id" v-model="course"></v-select>
+                    </div>
+                    <div class="form__item">
+                        <div class="form__radiobuttons">
+                            <div class="form__radiobuttons-title">
+                                Are you currently in Australia?
+                            </div>
+                            <div class="form__radiobuttons-items">
+                                <div class="checkbox form__chechbox">
+                                    <input id="c_1" data-error="Error" checked class="checkbox__input" type="radio" v-bind:disabled="loader" v-bind:value="true" name="australianResident" v-model="australianResident">
+                                    <label for="c_1" class="checkbox__label">
+                                        <span class="checkbox__text">Yes</span>
+                                    </label>
+                                </div>
+                                <div class="checkbox form__chechbox">
+                                    <input id="c_12" data-error="Error" class="checkbox__input" type="radio" v-bind:disabled="loader" v-bind:value="false" name="australianResident" v-model="australianResident">
+                                    <label for="c_12" class="checkbox__label">
+                                        <span class="checkbox__text">No</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form__item">
+                        <date-picker v-model="startDate" format="DD/MM/YYYY"
+                                     :disabled-date="disableBeforeToday"
+                                     type="date"
+                                     v-bind:disabled="loader"
+                                     placeholder="When would you like to start? *" input-class="input form__input"></date-picker>
+                    </div>
+                    <div class="alert alert-success" v-if="success">You Application has been submitted successfully. Our team will contact you soon. </div>
+                    <a class="button form__button" style="cursor: pointer" v-bind:disabled="loader" v-on:click="submit();" v-if="id==null">
+                        <div class="spinner-border spinner-border-sm text-white" role="status" v-if="loader">
+                        </div>
+                        <i class="fa-solid fa-floppy-disk" v-if="!loader"></i> Submit
+                    </a>
+                </div>
+                <br />
+                <div class="form__subtitle">
+                    Our team is prepared to help you in your student journey. Have a chat with us! Fill
+                    your
+                    details below.
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

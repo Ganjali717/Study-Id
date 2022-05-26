@@ -1,0 +1,113 @@
+﻿@using StudyId.WebApplication.Extensions
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>@ViewData["Title"]</title>
+    <!-- <style>body{opacity: 0;}</style> -->
+    <link rel="shortcut icon" href="/favicon.ico">
+    <!-- <meta name="robots" content="noindex, nofollow"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/css/all.inside.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/responsive.inside.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="wrapper">
+        <main class="page">
+            <div class="page__row">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <aside class="sidebar">
+                        <div class="sidebar__wrapper">
+                            <div id="close" class="sidebar__close"></div>
+                            <div class="sidebar__top">
+                                <a href="@Url.Action("Index", "Home")" class="sidebar__logo"><picture><source srcset="@Url.Content("~/img/elements/logo.webp")" type="image/webp"><img src="@Url.Content("~/img/elements/logo.png")" alt="Logo"></picture></a>
+                                <div class="sidebar__title">
+                                    Welcome @User.Identity.GetClaimUserFullName()
+                                </div>
+                                <nav class="sidebar__menu menu">
+                                    <ul class="menu__list">
+                                        
+                                        @if(User.Identity.GetClaimRole() != "Manager")
+                                        {
+                                            <li class="menu__item">
+                                            
+                                                <a href="@Url.Action("Index", "Accounts")" class="menu__link">
+                                                    <i class="fa-solid fa-users"></i> Accounts
+                                                </a>
+                                            </li>
+                                        }
+
+                                        <li class="menu__item">
+                                            <a href="@Url.Action("Index", "Applications")" class="menu__link">
+                                                <i class="fa-solid fa-screen-users"></i> Applications
+                                            </a>
+                                        </li>
+                                        <li class="menu__item">
+                                            <a href="@Url.Action("Index", "Articles")" class="menu__link">
+                                                <i class="fa-solid fa-book-sparkles"></i> Articles
+                                            </a>
+                                        </li>
+                                       @* <li class="menu__item">
+                                            <a href="@Url.Action("Index", "Organizations")" class="menu__link">
+                                                <i class="fa-solid fa-objects-column"></i> Organizations
+                                            </a>
+                                        </li>
+                                        <li class="menu__item">
+                                            <a href="@Url.Action("Index", "Tasks")" class="menu__link">
+                                                <i class="fa-solid fa-bars-progress"></i> Tasks
+                                            </a>
+                                        </li>*@
+                                        <li><hr/></li>
+                                        <li class="menu__item">
+                                            <a href="@Url.Action("Logout", "Auth")" class="menu__link">
+                                                <i class="fa-solid fa-arrow-up-left-from-circle"></i> Logout
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                                <span class="text-center text-muted">@Html.Raw($"v{Html.GetVersion()}")</span>
+                            </div>
+                        </div>
+                    </aside>
+                }
+                <div class="page__content">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <header class="header" style="padding: 1.5rem 0 !important;">
+                            <div class="header__container">
+                                <div class="header__row">
+                                    <div class="header__mobile">
+                                        <a href="#" class="header__logo">
+                                            <picture><source srcset="@Url.Content("~/img/elements/logo.webp")" type="image/webp"><img src="@Url.Content("~/img/elements/logo.png")" alt="Logo"></picture>
+                                        </a>
+                                        <button type="button" id="open" class="menu__icon icon-menu"><span></span></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </header>
+                    }
+                    @RenderBody()
+                </div>
+            </div>
+        </main>
+    </div>
+    <!-- <div id="popup" aria-hidden="true" class="popup">
+        <div class="popup__wrapper">
+            <div class="popup__content">
+                <button data-close type="button" class="popup__close">Закрыть</button>
+                <div class="popup__text">
+                    Text
+                </div>
+            </div>
+        </div>
+    </div> -->
+<script src="https://kit.fontawesome.com/442e2783bc.js" crossorigin="anonymous"></script>
+@* <script src="~/js/all.min.js" asp-append-version="true"></script>*@
+<script src="~/js/boostrap.bundle.js" asp-append-version="true"></script>
+
+<script src="~/js/vue.bundle.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

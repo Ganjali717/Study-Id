@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="SqlScripts\SID-31-insert-to-courses-table-the-list-of-courses.sql" />
+    <None Remove="SqlScripts\SID-6-create-base-superadmin-account.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="SqlScripts\SID-31-insert-to-courses-table-the-list-of-courses.sql" />
+    <EmbeddedResource Include="SqlScripts\SID-6-create-base-superadmin-account.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.123" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="6.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\StudyId.Entities\StudyId.Entities.csproj" />
+    <ProjectReference Include="..\StudyId.Models\StudyId.Models.csproj" />
+    <ProjectReference Include="..\StudyId.SmtpManager\StudyId.SmtpManager.csproj" />
+  </ItemGroup>
+
+</Project>

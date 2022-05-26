@@ -1,0 +1,252 @@
+﻿@model StudyId.Models.Dto.Blog.BlogArticleDto
+@{
+    ViewData["Title"] = $"StudyId - {Model.Article.Title}";
+    ViewData["Description"] = $"{Model.Article.ShortDescription}";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section MicroData{
+    <script type="application/ld+json">
+    {
+      "@Html.Raw("@context")": "https://schema.org",
+      "@Html.Raw("@type")": "NewsArticle",
+      "mainEntityOfPage": {
+        "@Html.Raw("@type")": "WebPage",
+        "@Html.Raw("@id")": "@Url.Action("View",new {route=Model.Article.Route})"
+      },
+      "headline": "@Html.Raw(Model.Article.Title)",
+      "backstory":"@Html.Raw(Model.Article.ShortDescription)",
+      "image": [
+        "@Model.Article.Image"
+      ],
+      "datePublished": "@Model.Article.PublishOn",
+      "author": {
+        "@Html.Raw("@type")": "Person",
+        "name": "Admin"
+      },
+      "publisher": {
+        "@Html.Raw("@type")": "Organization",
+        "name": "StudyId",
+        "logo": {
+          "@Html.Raw("@type")": "ImageObject",
+          "url": "@Url.Content("~/img/elements/logo.webp")"
+        }
+      }
+    }
+</script>
+}
+<section class="blog">
+    <div class="blog__container">
+        <div class="blog__breadcrumb breadcrumb">
+            <ul class="breadcrumb__list">
+                <li class="breadcrumb__item">
+                    <a href="@Url.Action("Index","Home")" class="breadcrumb__link">Home </a>
+                </li>
+                <li class="breadcrumb__item">
+                    <a href="@Url.Action("Index","Blog")" class="breadcrumb__link">News and Events </a>
+                </li>
+                <li class="breadcrumb__item">
+                    <span class="breadcrumb__current">
+                        @Model.Article.Title
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <div class="blog__top-head top-head">
+            <a href="" class="top-head__exit">
+                <img src="@Url.Content("/img/elements/arrow-left.svg")" alt="Icon" class="top-head__icon">
+            </a>
+            <h1 class="title blog__title">
+                @Model.Article.Title
+            </h1>
+        </div>
+        <div class="blog__row">
+            <div class="blog__content">
+                <article class="blog__article article">
+                    <div class="article__descr">
+                        <a href="@Url.Action("Index",new {category=Model.Article.CategoryRoute})" rel="nofollow" class="item-blog__descr">@Model.Article.Category</a>
+                    </div>
+                    <div class="article__image-ibg">
+                        <picture><source srcset="@Url.Content(Model.Article.Image)" type="image/webp"><img src="@Url.Content(Model.Article.Image)" alt="@Html.Raw(Model.Article.ImageTags)"></picture>
+                    </div>
+                    <div class="article__text-top">
+                        @Html.Raw(Model.Article.Body)
+                    </div>
+                    <div class="item-blog__row article__row">
+                        <div class="item-blog__info-flex">
+                            <img src="@Url.Content("~/img/blog/user.svg")" alt="User who published article" class="item-blog__icon">
+                            <span class="item-blog__info-text">
+                                Admin
+                            </span>
+                        </div>
+                        <div class="item-blog__info-flex">
+                            <img src="@Url.Content("~/img/blog/date.svg")" alt="Published date" class="item-blog__icon">
+                            <span class="item-blog__info-text">
+                                @Html.Raw(!string.IsNullOrEmpty(Model.Article.PublishOn) ? Model.Article.PublishOn : Model.Article.Created)
+                            </span>
+                        </div>
+                    </div>
+                    <div class="aside-blog__tags article__tags">
+                        @if (!string.IsNullOrEmpty(Model.Article.Tags))
+                        {
+                            foreach (var tag in Model.Article.Tags.Split(','))
+                            {
+                                <a href="@Url.Action("Index", new {tag=tag})" class="aside-blog__tag" rel="nofollow">
+                                    @Html.Raw(tag.ToLower())
+                                </a>
+                            }
+                        }
+                    </div>
+                    <div data-da=".blog__row,991,3" class="article__form-wrap">
+                        <form class="about__form form" id="contact-form">
+                            <div class="alert alert-danger" v-if="error!=null && error!=''">{{error}}</div>
+                            <div class="form__title">
+                                Request Your Free Online Assessment
+                            </div>
+                            <br />
+                            <div class="form__items">
+                                <div class="form__item">
+                                    <input type="text" name="firstname" data-error="Error" placeholder="First name*" class="input form__input" v-bind:disabled="loader" v-model="$v.firstName.$model" v-bind:class="{'error':$v.firstName.$error }" v-bind:disabled="loader" />
+                                    <div class="error form__error" v-if="$v.firstName.$error && !$v.firstName.required">
+                                        This field is required
+                                    </div>
+                                </div>
+                                <div class="form__item">
+                                    <input type="text" name="lastname" data-error="Error" placeholder="Last name*" class="input form__input" v-bind:disabled="loader" v-model="$v.lastName.$model" v-bind:class="{'error':$v.lastName.$error }" v-bind:disabled="loader" />
+                                    <div class="error form__error" v-if="$v.lastName.$error && !$v.lastName.required">
+                                        This field is required
+                                    </div>
+                                </div>
+                                <div class="form__item">
+                                    <input type="text" name="Email" data-error="Error" placeholder="Email*" class="input form__input" v-bind:disabled="loader" v-model="$v.email.$model" v-bind:class="{'error':$v.email.$error }" v-bind:disabled="loader" />
+                                    <div class="error form__error" v-if="$v.email.$error && !$v.email.required">
+                                        This field is required
+                                    </div>
+                                    <div class="error form__error" v-if="$v.email.$error && !$v.email.email">
+                                        Wrong email format
+                                    </div>
+                                </div>
+                                <div class="form__item">
+                                    <v-select :options="courses" placeholder="Course of Interest" class="form__input" v-bind:disabled="loader" label="title" :reduce="item => item.id" v-model="course"></v-select>
+                                </div>
+                                <div class="form__item">
+                                    <div class="form__radiobuttons">
+                                        <div class="form__radiobuttons-title">
+                                            Are you currently in Australia?
+                                        </div>
+                                        <div class="form__radiobuttons-items">
+                                            <div class="checkbox form__chechbox">
+                                                <input id="c_1" data-error="Error" checked class="checkbox__input" type="radio" v-bind:disabled="loader" v-bind:value="true" name="australianResident" v-model="australianResident">
+                                                <label for="c_1" class="checkbox__label">
+                                                    <span class="checkbox__text">Yes</span>
+                                                </label>
+                                            </div>
+                                            <div class="checkbox form__chechbox">
+                                                <input id="c_12" data-error="Error" class="checkbox__input" type="radio" v-bind:disabled="loader" v-bind:value="false" name="australianResident" v-model="australianResident">
+                                                <label for="c_12" class="checkbox__label">
+                                                    <span class="checkbox__text">No</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form__item">
+                                    <date-picker v-model="startDate" format="DD/MM/YYYY"
+                                                 :disabled-date="disableBeforeToday"
+                                                 type="date"
+                                                 v-bind:disabled="loader"
+                                                 placeholder="When would you like to start? *" input-class="input form__input"></date-picker>
+                                </div>
+                                <div class="alert alert-success" v-if="success">You Application has been submitted successfully. Our team will contact you soon. </div>
+                                <a class="button form__button" style="cursor: pointer" v-bind:disabled="loader" v-on:click="submit();" v-if="id==null">
+                                    <div class="spinner-border spinner-border-sm text-white" role="status" v-if="loader">
+                                    </div>
+                                    <i class="fa-solid fa-floppy-disk" v-if="!loader"></i> Submit
+                                </a>
+                            </div>
+                            <br />
+                        </form>
+                    </div>
+                </article>
+            </div>
+            <aside class="blog__aside aside-blog">
+                @using (Html.BeginForm("Index", "Blog", FormMethod.Get, new { @class = "aside-blog__form" }))
+                {
+                    <div class="aside-blog__item">
+                        @Html.TextBox("q", "", new {@class = "input aside-blog__input", placeholder = "Search"})
+                        <button class="aside-blog__button">
+                            <img src="@Url.Content("/img/blog/search.svg")" alt="Search icon">
+                        </button>
+                    </div>
+                }
+                <div class="aside-blog__blocks">
+                    <div class="aside-blog__block">
+                        <h3 class="aside-blog__title">
+                            Categories
+                        </h3>
+                        <div class="aside-blog__categories">
+                            <ul class="aside-blog__categories-list">
+                                @foreach (var category in Model.Categories)
+                                {
+                                    <li>
+                                        <a href="@Url.Action("Index",new {category=category.Route})" class="aside-blog__categories-link" rel="nofollow">
+                                            @category.Title
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="aside-blog__block">
+                        <h3 class="aside-blog__title">
+                            Related Posts
+                        </h3>
+                        <div class="aside-blog__slider-wrap">
+                            <div class="events__slider swiper">
+                                <div class="aside-blog__wrapper swiper-wrapper">
+                                    @foreach (var relItem in Model.RelatedArticles)
+                                    {
+                                        <div class="events__item swiper-slide item-events">
+                                            <div class="item-events__wrap">
+                                                <span class="item-events__decor"></span>
+                                                <a href="@Url.Action("View", new {route=relItem.Route})" class="item-events__image-ibg">
+                                                    <picture><source srcset="@Url.Content(relItem.Image)" type="image/webp"><img src="@Url.Content(relItem.Image)" alt="@Html.Raw(relItem.Title)"></picture>
+                                                </a>
+                                                <div class="item-events__content">
+                                                    <a href="@Url.Action("Index", new {category=relItem.CategoryRoute})" class="item-events__faculty">
+                                                        @relItem.Category
+                                                    </a>
+                                                    <a href="@Url.Action("View", new {route=relItem.Route})" class="item-events__title">
+                                                        @relItem.Title
+                                                    </a>
+                                                    <a href="@Url.Action("View", new {route=relItem.Route})" class="item-events__link">
+                                                        Read more
+                                                        <svg class="item-events__icon">
+                                                            <use href="@Url.Content("~/img/icons/icons.svg#arrow")"></use>
+                                                        </svg>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="aside-blog__block">
+                        <h3 class="aside-blog__title">
+                            Tags
+                        </h3>
+                        <div class="aside-blog__tags">
+                            @foreach (var tag in Model.Tags)
+                            {
+                                <a href="@Url.Action("Index", new {tag=tag})" class="aside-blog__tag">
+                                    @Html.Raw(tag.ToLower())
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</section>

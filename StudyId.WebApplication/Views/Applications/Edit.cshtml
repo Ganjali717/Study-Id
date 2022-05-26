@@ -1,0 +1,128 @@
+﻿@using Microsoft.Build.Framework
+@using StudyId.WebApplication.Extensions
+@{
+    ViewData["Title"] = Model==null ?  "Create Application" : "Edit Application";
+    Layout = "~/Views/Shared/_InsideLayout.cshtml";
+}
+@model StudyId.Models.Dto.Applications.ApplicationDto?
+@section Scripts
+{
+    @if (Model != null)
+    {
+        <script type="text/javascript">
+            var model = @Html.ToJson(Model);
+        </script>
+    }
+    <script src="~/js/controllers/applications/vue-applications-edit.js" asp-append-version="true"></script>
+}
+<div id="application-edit" class="container">
+    <div class="alert alert-danger" v-if="error!=null && error!=''">{{error}}</div>
+    <div class="course__breadcrumb breadcrumb">
+        <ul class="breadcrumb__list">
+            <li class="breadcrumb__item">
+                <a href="@Url.Action("Index")" class="breadcrumb__link">Applications </a>
+            </li>
+            <li class="breadcrumb__item">
+                <span class="breadcrumb__current">
+                    <i class="fa-solid fa-screen-users"></i>
+                    <span v-if="id==null">Create Application</span>
+                    <span v-if="id!=null">Edit Application:<strong>{{firstName}} {{lastName}}:{{courses[0].title}}</strong></span>
+                </span>
+            </li>
+        </ul>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="row mb-2">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="mb-2">Email</label>
+                        <input type="email" class="form-control shadow-none" v-model="$v.email.$model" v-bind:class="{'is-invalid':$v.email.$error }" v-bind:disabled="loader" />
+                        <div class="error form__error" v-if="$v.email.$error && !$v.email.required">
+                            This field is required
+                        </div>
+                        <div class="error form__error" v-if="$v.email.$error && !$v.email.email">
+                           Wrong email format
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="mb-2">Phone</label>
+                        <input type="number" class="form-control shadow-none" v-model="phone" />
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="mb-2">First Name</label>
+                        <input type="text" class="form-control shadow-none" v-model="$v.firstName.$model" v-bind:class="{'is-invalid':$v.firstName.$error }" v-bind:disabled="loader" />
+                        <div class="error form__error" v-if="$v.firstName.$error && !$v.firstName.required">
+                            This field is required
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="mb-2">Last Name</label>
+                        <input type="text" class="form-control shadow-none" v-model="$v.lastName.$model" v-bind:class="{'is-invalid':$v.lastName.$error }" v-bind:disabled="loader" />
+                        <div class="error form__error" v-if="$v.lastName.$error && !$v.lastName.required">
+                            This field is required
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="mb-2">Course</label>
+                        <v-select :options="courses" label="title" :reduce="item => item.id" v-model="course"></v-select>
+                        <div class="error form__error" v-if="$v.course.$error && !$v.course.required">
+                            This field is required
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="mb-2">Start Date</label>
+                        <div class="">
+                            <date-picker v-model="startDate" format="DD/MM/YYYY"
+                                         type="date"
+                                         placeholder="Select date" input-class="form-control shadow-none"></date-picker>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-6">
+                    <div class="form-group mt-2">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" v-model="australianResident">
+                            <label class="form-check-label mt-1" for="flexSwitchCheckChecked">Australia Resident</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div v-if="success && id==null" class="alert alert-success mt-1">The application was successfully created. </div>
+            <div v-if="success && id!=null" class="alert alert-success mt-1">The application was successfully updated. </div>
+            <div class="row">
+                <div class="col-12 d-inline-flex justify-content-end">
+                    <button class="btn btn-success text-white" v-bind:disabled="loader" v-on:click="create();" v-if="id==null">
+                        <div class="spinner-border spinner-border-sm text-white" role="status" v-if="loader">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <i class="fa-solid fa-floppy-disk" v-if="!loader"></i> Create
+                    </button>
+                    <button class="btn btn-info text-white" v-bind:disabled="loader" v-on:click="edit();" v-if="id!=null">
+                        <div class="spinner-border spinner-border-sm text-white" role="status" v-if="loader">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <i class="fa-solid fa-floppy-disk" v-if="!loader"></i> Edit
+                    </button>
+                    <a href="@Url.Action("Index","Applications")" class="btn" style="margin-left: 10px;"><i class="fa-solid fa-arrow-left-long"></i> Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

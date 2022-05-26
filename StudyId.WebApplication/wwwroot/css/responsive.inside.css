@@ -1,0 +1,45 @@
+﻿@media only screen and (max-width: 1650px) {
+    #organizations-list table {
+        font-size: 12px !important;
+    }
+    #organizations-list .v-select, .form-select, .vs__search, .form-control {
+        font-size: 12px !important;
+    }
+    #applications-list table {
+        font-size: 12px !important;
+    }
+    #applications-list .v-select, .form-select, .vs__search, .form-control {
+        font-size: 12px !important;
+    }
+    #articles-list table {
+        font-size: 12px !important;
+    }
+    #articles-list .v-select, .form-select, .vs__search, .form-control {
+        font-size: 12px !important;
+    }
+    #tasks-list table {
+        font-size: 12px !important;
+    }
+    #tasks-list .v-select, .form-select, .vs__search, .form-control {
+        font-size: 12px !important;
+    }
+    #accounts-list table {
+        font-size: 12px !important;
+    }
+    #accounts-list .v-select, .form-select, .vs__search, .form-control {
+        font-size: 12px !important;
+    }
+    select option {
+        font-size: 12px !important;
+    }
+}
+
+.vs__dropdown-menu {
+    z-index: 9999999 !important;
+}
+
+.form__item .vs__search,
+.vs__search:focus {
+    padding: 0 7px !important;
+}
+

@@ -1,0 +1,155 @@
+﻿@{
+    ViewData["Title"] = "Environment Management & Sustainability - In studying the science of sustainability we typically focus on three areas (environmental, economic, and social). ";
+    ViewData["Description"] = "In studying the science of sustainability we typically focus on three areas (environmental, economic, and social). The courses in sustainable operations will deal with all three of these areas. It is by partnering with various organizations, that we will give you the necessary knowledge and skills to have a successful career in sustainable operations.";
+    ViewData["Canonical"] = Url.Action("EnvironmentManagementSustainability", "Home");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section MicroData{
+<script type="application/ld+json">
+    {
+      "@Html.Raw("@context")": "https://schema.org",
+      "@Html.Raw("@type")": "Course",
+      "name": "Environment Management & Sustainability",
+      "description": "In studying the science of sustainability we typically focus on three areas (environmental, economic, and social). The courses in sustainable operations will deal with all three of these areas. It is by partnering with various organizations, that we will give you the necessary knowledge and skills to have a successful career in sustainable operations.",
+      "provider": {
+        "@Html.Raw("@type")": "Organization",
+        "name": "Study Id",
+        "sameAs": "@Url.Action("EnvironmentManagementSustainability")"
+      }
+    }
+</script>
+}
+<section class="course">
+    <div class="course__container">
+        <div class="course__breadcrumb breadcrumb">
+            <ul class="breadcrumb__list">
+                <li class="breadcrumb__item">
+                    <a href="@Url.Action("Index")" class="breadcrumb__link">Home </a>
+                </li>
+                <li class="breadcrumb__item">
+                    <a href="@Url.Action("Qualifications")" class="breadcrumb__link"> Оur Faculties </a>
+                </li>
+                <li class="breadcrumb__item">
+                    <span class="breadcrumb__current">
+                        Environment Management & Sustainability
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <div class="course__top-head top-head">
+            <a href="@Url.Action("Qualifications")" class="top-head__exit">
+                <img src="@Url.Content("/img/elements/arrow-left.svg")" alt="Icon" class="top-head__icon">
+            </a>
+            <h1 class="title course__title">
+                Environment Management & Sustainability
+            </h1>
+        </div>
+        <div class="course__top top-course">
+            <div class="top-course__row">
+                <div class="top-course__title" style="color: #34bd1d">
+                    Environment Management & Sustainability
+                </div>
+                <div class="top-course__image-ibg">
+                    <picture><source srcset="@Url.Content("~/img/faculty/05.webp")" type="image/webp"><img src="@Url.Content("~/img/faculty/05.webp")" alt="Environment Management & Sustainability"></picture>
+                </div>
+            </div>
+            <div class="top-course__price price-course" style="background-color: #34bd1d">
+                <a href="#contact-form" class="price-course__button button button_white" style="color: #34bd1d">
+                    Аdmission process
+                </a>
+            </div>
+        </div>
+        <div class="course__text">
+            <p>
+                Taking care of environment is no more an exceptional deal for scientific institutions but an indispensable part of every up-to-date business. The necessity in fulfilling environmental protection requirements becomes even more prominent. This leads to the demand for environmental managers and sustainability specialists to increase.
+            </p>
+            <p>
+                Do you want to get this in-demand qualification to boost your career? StudyID provides you a wide range of educational organizations throughout Australia where you are welcome to get the necessary skills and knowledge by choosing various certified educational programs in the field of environmental management and sustainability. The AU government puts great attention to environmental issues. That’s why the level of competency of environment managers and officers in Australian training centers is high. By achieving a degree in environmental management and sustainability, you may get multiple career opportunities including the following vacancies:
+                <ul>
+                    <li>sustainability officer,</li>
+                    <li>environmental management officer,</li>
+                    <li>specialist in environmental services and protection institutions.</li>
+                </ul>
+            </p>
+            <p>
+                Make the greatest upgrade of your skills with StudyID services. Apply for available courses in the field of environmental management and sustainability in Australia.
+            </p>
+
+        </div>
+        <div class="course__row">
+            <form class="contact__form form" id="contact-form">
+                <div class="alert alert-danger" v-if="error!=null && error!=''">{{error}}</div>
+                <div class="form__title">
+                    Request Your Free Online Assessment
+                </div>
+                <br />
+                <div class="form__items">
+                    <div class="form__item">
+                        <input type="text" name="firstname" data-error="Error" placeholder="First name*" class="input form__input" v-bind:disabled="loader" v-model="$v.firstName.$model" v-bind:class="{'error':$v.firstName.$error }" v-bind:disabled="loader" />
+                        <div class="error form__error" v-if="$v.firstName.$error && !$v.firstName.required">
+                            This field is required
+                        </div>
+                    </div>
+                    <div class="form__item">
+                        <input type="text" name="lastname" data-error="Error" placeholder="Last name*" class="input form__input" v-bind:disabled="loader" v-model="$v.lastName.$model" v-bind:class="{'error':$v.lastName.$error }" v-bind:disabled="loader" />
+                        <div class="error form__error" v-if="$v.lastName.$error && !$v.lastName.required">
+                            This field is required
+                        </div>
+                    </div>
+                    <div class="form__item">
+                        <input type="text" name="Email" data-error="Error" placeholder="Email*" class="input form__input" v-bind:disabled="loader" v-model="$v.email.$model" v-bind:class="{'error':$v.email.$error }" v-bind:disabled="loader" />
+                        <div class="error form__error" v-if="$v.email.$error && !$v.email.required">
+                            This field is required
+                        </div>
+                        <div class="error form__error" v-if="$v.email.$error && !$v.email.email">
+                            Wrong email format
+                        </div>
+                    </div>
+                    <div class="form__item">
+                        <v-select :options="courses" placeholder="Course of Interest" class="form__input" v-bind:disabled="loader" label="title" :reduce="item => item.id" v-model="course"></v-select>
+                    </div>
+                    <div class="form__item">
+                        <div class="form__radiobuttons">
+                            <div class="form__radiobuttons-title">
+                                Are you currently in Australia?
+                            </div>
+                            <div class="form__radiobuttons-items">
+                                <div class="checkbox form__chechbox">
+                                    <input id="c_1" data-error="Error" checked class="checkbox__input" type="radio" v-bind:disabled="loader" v-bind:value="true" name="australianResident" v-model="australianResident">
+                                    <label for="c_1" class="checkbox__label">
+                                        <span class="checkbox__text">Yes</span>
+                                    </label>
+                                </div>
+                                <div class="checkbox form__chechbox">
+                                    <input id="c_12" data-error="Error" class="checkbox__input" type="radio" v-bind:disabled="loader" v-bind:value="false" name="australianResident" v-model="australianResident">
+                                    <label for="c_12" class="checkbox__label">
+                                        <span class="checkbox__text">No</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form__item">
+                        <date-picker v-model="startDate" format="DD/MM/YYYY"
+                                     :disabled-date="disableBeforeToday"
+                                     type="date"
+                                     v-bind:disabled="loader"
+                                     placeholder="When would you like to start? *" input-class="input form__input"></date-picker>
+                    </div>
+                    <div class="alert alert-success" v-if="success">You Application has been submitted successfully. Our team will contact you soon. </div>
+                    <a class="button form__button" style="cursor: pointer" v-bind:disabled="loader" v-on:click="submit();" v-if="id==null">
+                        <div class="spinner-border spinner-border-sm text-white" role="status" v-if="loader">
+                        </div>
+                        <i class="fa-solid fa-floppy-disk" v-if="!loader"></i> Submit
+                    </a>
+                </div>
+                <br />
+                <div class="form__subtitle">
+                    Our team is prepared to help you in your student journey. Have a chat with us! Fill
+                    your
+                    details below.
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

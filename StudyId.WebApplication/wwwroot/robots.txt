@@ -1,0 +1,7 @@
+﻿User-agent: *
+Disallow: /?page_id=*
+Disallow: /tag/
+Disallow: /category/uncategorized/feed/
+Disallow: /category/living-in-australia/
+Disallow: /business/?customize_changeset_uuid=11d3107b-dcff-4c65-88d0-cb8d8833ab96&customize_autosaved=on
+Disallow: /digital-media-information-technology/

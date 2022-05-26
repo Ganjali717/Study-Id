@@ -1,0 +1,247 @@
+﻿@{
+    ViewData["Title"] = "Manage Account on the StudyId";
+    Layout = "~/Views/Shared/_InsideLayout.cshtml";
+}
+@section Scripts
+{
+<script src="~/js/controllers/accounts/vue-accounts-list.js"></script>
+}
+<div id="accounts-list" class="container">
+    <div class="alert alert-danger" v-if="error!=null && error!=''">{{error}}</div>
+    <div class="course__breadcrumb breadcrumb">
+        <ul class="breadcrumb__list">
+            <li class="breadcrumb__item">
+                <a href="@Url.Action("Index")" class="breadcrumb__link">Accounts </a>
+            </li>
+            <li class="breadcrumb__item">
+                <span class="breadcrumb__current">
+                    <i class="fa-solid fa-users"></i> List of Accounts
+                </span>
+            </li>
+        </ul>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            @*           <div class="row">
+                <h3><i class="fa-solid fa-users"></i> Managing Accounts</h3>
+                </div>
+                <hr class="mt-0"/>*@
+            <div class="row mt-1 justify-content-end">
+                <div class="col-3">
+                    <button class="btn btn-info text-white w-100" data-toggle="modal" data-bs-toggle="modal" data-bs-target="#invite-accounts" v-on:click="clearForm()"><i class="fa-solid fa-plus"></i> Invite User</button>
+                </div>
+            </div>
+            <br/>
+            <div class="row mt-1 justify-content-around">
+                <div class="col-6">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <input type="text" class="form-control shadow-none" placeholder="Search by Name or Email" aria-label="Search by Fullname or Email" aria-describedby="basic-addon1" v-model="q" v-on:input="debounceSearch">
+                    </div>
+                </div>
+                <div class="col-3">
+                    <v-select :options="roles" placeholder="Role" v-bind:disabled="loader" label="title" :reduce="item => item.value" v-model="role" v-on:change="search()"></v-select>
+                </div>
+                <div class="col-3">
+                    <v-select :options="statuses" placeholder="Status" v-bind:disabled="loader" label="title" :reduce="item => item.value" v-model="status" v-on:change="search()"></v-select>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th class="col-1">#</th>
+                        <th scope="col" v-on:click="sortingBy('FirstName')" class="icon-button col-2">
+                            Full Name
+                            <i class="fa-solid" v-show="sortBy=='FirstName'" :class="{'fa-arrow-down-1-9':sortAsc, 'fa-arrow-up-9-1':!sortAsc}"></i>
+                        </th>
+                        <th scope="col" v-on:click="sortingBy('Email')" class="icon-button col-3" >
+                            Email
+                            <i class="fa-solid" v-show="sortBy=='Email'" :class="{'fa-arrow-down-1-9':sortAsc, 'fa-arrow-up-9-1':!sortAsc}"></i>
+                        </th>
+                        <th  scope="col" v-on:click="sortingBy('Role')" class="icon-button col-1">
+                            Role
+                            <i class="fa-solid" v-show="sortBy=='Role'" :class="{'fa-arrow-down-1-9':sortAsc, 'fa-arrow-up-9-1':!sortAsc}"></i>
+                        </th>
+                        <th scope="col" v-on:click="sortingBy('Status')" class="icon-button col-2">
+                            Status
+                            <i class="fa-solid" v-show="sortBy=='Status'" :class="{'fa-arrow-down-1-9':sortAsc, 'fa-arrow-up-9-1':!sortAsc}"></i>
+                        </th>
+                        <th scope="col" v-on:click="sortingBy('Created')" class="icon-button col-2">
+                            Created
+                            <i class="fa-solid" v-show="sortBy=='Created'" :class="{'fa-arrow-down-1-9':sortAsc, 'fa-arrow-up-9-1':!sortAsc}"></i>
+                        </th>
+                        <th class="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(item,index) in items" v-bind:class="{'table-info':item.status=='Invited'}">
+                        <th class="col-1">{{index+(itemsCount*(pageCurrent-1))+1}}</th>
+                        <td>{{item.firstName}} {{item.lastName}}</td>
+                        <td>{{item.email}}</td>
+                        <td>{{item.role}}</td>
+                        <td>
+                            <select v-if="item.status == 'Active' || item.status == 'Inactive'" class="form-select" style="width: 100px;" aria-label="Role" v-model="item.status" v-on:change="changeStatus(item)">
+                                <option v-for="stat in listStatuses" v-bind:value="stat.value">
+                                    {{stat.title}}
+                                </option>
+                            </select>
+                            
+                            <select v-if="item.status == 'Invited'" class="form-select" style="width: 100px;" aria-label="Role" v-model="item.status" v-on:change="changeStatus(item)" disabled>
+                                <option>
+                                   Invited
+                                </option>
+                            </select>
+                        </td>
+                        <td>{{item.created}}</td>
+                        <td class="text-end"><span class="fa-solid fa-trash-can icon-button " data-toggle="tooltip" data-original-title="Share" v-if="item.email!='admin@study-id.com'" v-on:click="removePopup(item);"></span></td>
+                    </tr>
+                    <tr v-if="items.length==0 && !loader">
+                        <td colspan="7" class="text-center">There are no records.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row mt-2">
+                <ul class="pagination mt-1">
+                    <li v-show="pagesBlocks >1">
+                        <button class="page-link" title="Scroll to the first ten pages" :disabled="pagesBlock==1" v-on:click="pageBlockShiftTop(-1)"><i class="fa fa-angle-double-left"></i></button>
+                    </li>
+                    <li v-show="pagesBlocks >1">
+                        <button class="page-link" title="(Alt+[) Scroll pages backward" :disabled="pagesBlock==1" accesskey="[" v-on:click="pageBlockShift(-1)"><i class="fa fa-angle-left"></i></button>
+                    </li>
+                    <li v-for="page in pages" v-show="page >= (pagesBlock-1) * pagesInPageBlock && page <= ((pagesBlock-1) * pagesInPageBlock + pagesInPageBlock)"
+                        class="page-item" v-bind:class="{active:page==pageCurrent}">
+                        <button href="#" class="page-link" v-on:click="setPage(page);">{{page}}</button>
+                    </li>
+                    <li v-show="pagesBlocks >1">
+                        <button class="page-link" title="(Alt+]) Scroll pages forward" v-on:click="pageBlockShift(1)" accesskey="]"><i class="fa fa-angle-right"></i></button>
+                    </li>
+                    <li v-show="pagesBlocks >1">
+                        <button class="page-link" title="Scroll to the last ten pages" v-on:click="pageBlockShiftTop(1)"><i class="fa fa-angle-double-right"></i></button>
+                    </li>
+                </ul>
+            </div>
+            <div class="row mt-1">
+                <div class="d-inline-flex justify-content-start">
+                    <div class="pagination-items-count mb-3 col-1">
+                        <select class="form-select col-12" style="font-size: 14px;" v-model="itemsCount" v-on:change="changeItemsCount()">
+                            <option v-for="item in itemsCountSelect" v-bind:value="item">
+                                {{item}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="spinner-border text-info m-1" role="status" v-if="loader">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Modal Remove Account Popup -->
+    <div class="modal fade" id="remove-account" tabindex="-1" aria-hidden="true" v-if="operationalItem!=null">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Remove Account</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" v-bind:disabled="operationalLoader"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to remove: <span class="text-violet">- {{operationalItem.firstName}} {{operationalItem.lastName}}</span>
+                    <div class="alert alert-danger m-1" v-if="operationalError!=null">{{operationalError}}</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" v-bind:disabled="operationalLoader">Close</button>
+                    <button type="button" class="btn btn-danger" v-bind:disabled="operationalLoader" v-on:click="remove();">
+                        <div class="spinner-border spinner-border-sm text-white" role="status" v-if="operationalLoader">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <i class="fa-solid fa-trash-can" v-show="!operationalLoader"></i> Remove
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Invite new Accounts -->
+    <div class="modal fade" id="invite-accounts" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Invite User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" v-bind:disabled="inviteLoader"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th class="col-3">Email</th>
+                            <th class="col-2">Role</th>
+                            <th class="col-3">FirstName (optional)</th>
+                            <th class="col-3">LastName (optional)</th>
+                            <th class="col-1"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="(item,index) in inviteItems">
+                            <td class="col-5">
+                                <input type="email" class="form-control shadow-none" v-model="$v.inviteItems.$model[index].email" v-bind:class="{'is-invalid':$v.inviteItems.$each[index].email.$error || $v.inviteItems.$each[index].$error }" v-bind:disabled="inviteLoader" />
+                                <div class="error form__error" v-if="($v.inviteItems.$each[index].email.$error && !$v.inviteItems.$each[index].email.required)">
+                                    This field is required
+                                </div>
+                                <div class="error form__error" v-if="$v.inviteItems.$each[index].email.$error && !$v.inviteItems.$each[index].email.email">
+                                   Wrong email format
+                                </div>
+                                <div class="error form__error" v-if="$v.inviteItems.$each[index].$error && !$v.inviteItems.$each[index].isNotDuplicate">
+                                    This field has a duplicate value
+                                </div>
+                                <div class="error form__error" v-if="$v.inviteItems.$each[index].$error && !$v.inviteItems.$each[index].email.exist">
+                                    This email is used by another account.
+                                </div>
+                                
+                            </td>
+                            <td class="col">
+                                @* <v-select  append-to-body :clearable="false"  :options="inviteRoles" placeholder="Role" v-bind:disabled="loader" label="title" :reduce="item => item.value" v-model="item.role"></v-select>*@
+                                <select class="form-select shadow-none" aria-label="Status" v-model="item.role" v-bind:disabled="inviteLoader">
+                                    <option v-for="item in listRole" v-bind:value="item.value">
+                                        {{item.title}}
+                                    </option>
+                                </select>
+                            </td>
+                            <td class="col">
+                                <input type="text" class="form-control shadow-none" v-model="item.firstname" v-bind:disabled="inviteLoader" />
+                            </td>
+                            <td class="col">
+                                <input type="text" class="form-control shadow-none" v-model="item.lastname" v-bind:disabled="inviteLoader" />
+                            </td>
+
+                            <td class="col-1">
+                                <i class="fa-solid fa-trash-can fa-xl icon-button" v-bind:disabled="inviteLoader" v-on:click="removeInvite(item);" style="margin-top: 15px;"></i>
+                            </td>
+                        </tr>
+                    
+                        <tr class="mt-4">
+                            <td colspan="5">
+                                <button class="btn btn-sm btn-success" v-bind:disabled="inviteLoader" v-on:click="addInvite();"><i class="fa-solid fa-plus-large"></i></button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="alert alert-success" v-if="inviteSuccess">Invitations were successfully sent</div>
+                    <div class="alert alert-danger m-1" v-if="inviteError!=null">{{inviteError}}</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" v-bind:disabled="inviteLoader">Close</button>
+                    <button type="button" class="btn btn-info text-white" v-bind:disabled="inviteLoader" v-on:click="invite();">
+                        <div class="spinner-border spinner-border-sm text-white" role="status" v-if="inviteLoader">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <i class="fa-solid fa-user-plus" v-show="!inviteLoader"></i> Invite
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

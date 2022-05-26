@@ -1,0 +1,123 @@
+﻿@using Microsoft.Build.Framework
+@using StudyId.WebApplication.Extensions
+@{
+    ViewData["Title"] = Model==null ?  "Create Task" : "Edit Task";
+    Layout = "~/Views/Shared/_InsideLayout.cshtml";
+}
+@model StudyId.Models.Dto.Admin.Tasks.TaskDto?
+@section Scripts
+{
+    @if (Model != null)
+    {
+        <script type="text/javascript">
+            var model = @Html.ToJson(Model);
+        </script>
+    }
+    <script asp-append-version="true" src="~/js/controllers/tasks/vue-tasks-edit.js"></script>
+}
+
+<div id="tasks-edit" class="container">
+    <div class="alert alert-danger" v-if="error!=null && error!=''">{{error}}</div>
+    <div class="course__breadcrumb breadcrumb">
+        <ul class="breadcrumb__list">
+            <li class="breadcrumb__item">
+                <a href="@Url.Action("Index")" class="breadcrumb__link">Tasks </a>
+            </li>
+            <li class="breadcrumb__item">
+                <span class="breadcrumb__current">
+                    <i class="fa-solid fa-screen-users"></i>
+                    <span v-if="id==null">Create Task</span>
+                    <span v-if="id!=null">Edit Task:<strong>{{title}}</strong></span>
+                </span>
+            </li>
+        </ul>
+    </div>
+    <h1 class="p-2" style="font-size: 20px; color: #6f7eff;"> Create Task <i class="fa-solid fa-buildings"></i></h1>
+    <div class="card">
+        <div class="card-body">
+            <br/>
+            <div class="row mb-3">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label class="mb-2">Title</label>
+                        <input type="text"  class="form-control shadow-none" v-model="$v.title.$model" placeholder="Enter title" name="title" v-bind:class="{'is-invalid':$v.title.$error }" v-bind:disabled="loader"/>
+                        <div class="error form__error" v-if="$v.title.$error && !$v.title.required">
+                            This field is required
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label class="mb-2">Applicants</label>
+                        <v-select :options="applications" :reduce="item => item.id" label="firstName" v-model="application" v-on:input="loadInput" >
+                            <template slot="option" slot-scope="option">
+                                <span :class="option.icon"></span>
+                                {{ option.firstName }} {{option.lastName}} : {{option.courseName}}
+                            </template>
+                            <template slot="selected-option" slot-scope="option">
+                                <span :class="option.icon"></span>
+                                {{ option.firstName }} {{option.lastName}} : {{option.courseName}}
+                            </template>
+                        </v-select>
+                        <div class="error form__error" v-if="$v.application.$error && !$v.application.required">
+                            This field is required
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-2 mt-4">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="mb-2">Task Type</label>
+                        <v-select :options="taskType" label="title" :reduce="item => item.value" v-on:input="value => loadType(value)" v-model="task"></v-select>
+                        <div class="error form__error" v-if="$v.task.$error && !$v.task.required">
+                            This field is required
+                        </div>
+                    </div>
+                    <br/><br/>
+                    <div class="form-group">
+                        <label class="mb-2">Due Date</label>
+                        <date-picker v-model="dueDate" format="DD/MM/YYYY"
+                                     type="date"
+                                     placeholder="Due Date" input-class="form-control shadow-none"></date-picker>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea rows="5" class="form-control shadow-none mt-2" id="description" name="description" placeholder="Enter Description" v-model="$v.description.$model" v-bind:class="{'is-invalid':$v.description.$error }" v-bind:disabled="loader"></textarea>
+                        <div class="error form__error" v-if="$v.description.$error && !$v.description.required">
+                            This field is required
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/><br/>
+            <div class="row" v-if="success">
+                <div class="col-12">
+                    <div v-if="success && id==null" class="alert alert-success mt-1">The task was successfully created. </div>
+                    <div v-if="success && id!=null" class="alert alert-success mt-1">The task was successfully updated. </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 d-inline-flex justify-content-end">
+                    <button class="btn btn-success text-white" v-bind:disabled="loader" v-on:click="create();" v-if="id==null">
+                        <div class="spinner-border spinner-border-sm text-white" role="status" v-if="loader">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <i class="fa-solid fa-floppy-disk" v-if="!loader"></i> Create
+                    </button>
+                    <button class="btn btn-primary text-white" v-bind:disabled="loader" v-on:click="edit();" v-if="id!=null">
+                        <div class="spinner-border spinner-border-sm text-white" role="status" v-if="loader">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <i class="fa-solid fa-floppy-disk" v-if="!loader"></i> Edit
+                    </button>
+                    <a href="@Url.Action("Index","Tasks")" class="btn" style="margin-left: 10px;"><i class="fa-solid fa-arrow-left-long"></i> Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,154 @@
+﻿@{
+    ViewData["Title"] = "Marketing & Communications - These courses offer students the opportunity to learn about various marketing strategies. Students will participate in projects that teach various advertising, integrated marketing, and communications techniques.";
+    ViewData["Description"] = "These courses offer students the opportunity to learn about various marketing strategies. Students will participate in projects that teach various advertising, integrated marketing, and communications techniques. Once the students complete the prescribed curriculum, they will have a competitive advantage in today’s fast-paced world of business.";
+    ViewData["Canonical"] = Url.Action("MarketingCommunications", "Home");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section MicroData{
+<script type="application/ld+json">
+    {
+      "@Html.Raw("@context")": "https://schema.org",
+      "@Html.Raw("@type")": "Course",
+      "name": "Marketing & Communications",
+      "description": "These courses offer students the opportunity to learn about various marketing strategies. Students will participate in projects that teach various advertising, integrated marketing, and communications techniques. Once the students complete the prescribed curriculum, they will have a competitive advantage in today’s fast-paced world of business.",
+      "provider": {
+        "@Html.Raw("@type")": "Organization",
+        "name": "Study Id",
+        "sameAs": "@Url.Action("MarketingCommunications")"
+      }
+    }
+</script>
+}
+<section class="course">
+    <div class="course__container">
+        <div class="course__breadcrumb breadcrumb">
+            <ul class="breadcrumb__list">
+                <li class="breadcrumb__item">
+                    <a href="@Url.Action("Index")" class="breadcrumb__link">Home </a>
+                </li>
+                <li class="breadcrumb__item">
+                    <a href="@Url.Action("Qualifications")" class="breadcrumb__link"> Оur Faculties </a>
+                </li>
+                <li class="breadcrumb__item">
+                    <span class="breadcrumb__current">
+                        Marketing & Communications
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <div class="course__top-head top-head">
+            <a href="@Url.Action("Qualifications")" class="top-head__exit">
+                <img src="@Url.Content("/img/elements/arrow-left.svg")" alt="Icon" class="top-head__icon">
+            </a>
+            <h1 class="title course__title">
+                Marketing & Communications
+            </h1>
+        </div>
+        <div class="course__top top-course">
+            <div class="top-course__row">
+                <div class="top-course__title" style="color:#ff7468">
+                    Marketing & Communications
+                </div>
+                <div class="top-course__image-ibg">
+                    <picture><source srcset="@Url.Content("~/img/faculty/10.webp")" type="image/webp"><img src="@Url.Content("~/img/faculty/10.webp")" alt="Marketing & Communications"></picture>
+                </div>
+            </div>
+            <div class="top-course__price price-course" style="background-color:#ff7468">
+                <a href="#contact-form" class="price-course__button button button_white" style="color:#ff7468">
+                    Аdmission process
+                </a>
+            </div>
+        </div>
+        <div class="course__text">
+            <p>
+                It is marketing that allows businesses to reach the highest goals. Knowing various marketing tools and strategies opens wide opportunities even to the youngest specialist. The demand for skilled marketing managers is always on the top. It is a great idea for people who want to bound their lives with advertising, marketing, PR, and digital marketing industries to launch special training courses in the field of Marketing and Communication.
+            </p>
+            <p>
+                Who will gain success in this program?
+                <ul>
+                    <li>Those who are open-hearted and ready to learn new ideas constantly.</li>
+                    <li>Experienced businessmen whose goal is to increase their marketing skills.</li>
+                    <li>People trying to change their profession and start a new page in their life.</li>
+                </ul>
+            </p>
+            <p>
+                We are open to all of you! StudyID offers local and overseas applicants to apply for Marketing & Communication training programs in certified Australian educational organizations. We will help you to study marketing strategies above and beyond to gain success in your career.
+            </p>
+        </div>
+        <div class="course__row">
+            <form class="contact__form form" id="contact-form">
+                <div class="alert alert-danger" v-if="error!=null && error!=''">{{error}}</div>
+                <div class="form__title">
+                    Request Your Free Online Assessment
+                </div>
+                <br />
+                <div class="form__items">
+                    <div class="form__item">
+                        <input type="text" name="firstname" data-error="Error" placeholder="First name*" class="input form__input" v-bind:disabled="loader" v-model="$v.firstName.$model" v-bind:class="{'error':$v.firstName.$error }" v-bind:disabled="loader" />
+                        <div class="error form__error" v-if="$v.firstName.$error && !$v.firstName.required">
+                            This field is required
+                        </div>
+                    </div>
+                    <div class="form__item">
+                        <input type="text" name="lastname" data-error="Error" placeholder="Last name*" class="input form__input" v-bind:disabled="loader" v-model="$v.lastName.$model" v-bind:class="{'error':$v.lastName.$error }" v-bind:disabled="loader" />
+                        <div class="error form__error" v-if="$v.lastName.$error && !$v.lastName.required">
+                            This field is required
+                        </div>
+                    </div>
+                    <div class="form__item">
+                        <input type="text" name="Email" data-error="Error" placeholder="Email*" class="input form__input" v-bind:disabled="loader" v-model="$v.email.$model" v-bind:class="{'error':$v.email.$error }" v-bind:disabled="loader" />
+                        <div class="error form__error" v-if="$v.email.$error && !$v.email.required">
+                            This field is required
+                        </div>
+                        <div class="error form__error" v-if="$v.email.$error && !$v.email.email">
+                            Wrong email format
+                        </div>
+                    </div>
+                    <div class="form__item">
+                        <v-select :options="courses" placeholder="Course of Interest" class="form__input" v-bind:disabled="loader" label="title" :reduce="item => item.id" v-model="course"></v-select>
+                    </div>
+                    <div class="form__item">
+                        <div class="form__radiobuttons">
+                            <div class="form__radiobuttons-title">
+                                Are you currently in Australia?
+                            </div>
+                            <div class="form__radiobuttons-items">
+                                <div class="checkbox form__chechbox">
+                                    <input id="c_1" data-error="Error" checked class="checkbox__input" type="radio" v-bind:disabled="loader" v-bind:value="true" name="australianResident" v-model="australianResident">
+                                    <label for="c_1" class="checkbox__label">
+                                        <span class="checkbox__text">Yes</span>
+                                    </label>
+                                </div>
+                                <div class="checkbox form__chechbox">
+                                    <input id="c_12" data-error="Error" class="checkbox__input" type="radio" v-bind:disabled="loader" v-bind:value="false" name="australianResident" v-model="australianResident">
+                                    <label for="c_12" class="checkbox__label">
+                                        <span class="checkbox__text">No</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form__item">
+                        <date-picker v-model="startDate" format="DD/MM/YYYY"
+                                     :disabled-date="disableBeforeToday"
+                                     type="date"
+                                     v-bind:disabled="loader"
+                                     placeholder="When would you like to start? *" input-class="input form__input"></date-picker>
+                    </div>
+                    <div class="alert alert-success" v-if="success">You Application has been submitted successfully. Our team will contact you soon. </div>
+                    <a class="button form__button" style="cursor: pointer" v-bind:disabled="loader" v-on:click="submit();" v-if="id==null">
+                        <div class="spinner-border spinner-border-sm text-white" role="status" v-if="loader">
+                        </div>
+                        <i class="fa-solid fa-floppy-disk" v-if="!loader"></i> Submit
+                    </a>
+                </div>
+                <br />
+                <div class="form__subtitle">
+                    Our team is prepared to help you in your student journey. Have a chat with us! Fill
+                    your
+                    details below.
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,299 @@
+﻿@using Microsoft.Build.Framework
+@using StudyId.WebApplication.Extensions
+@{
+    ViewData["Title"] = Model == null ? "Create Organizations" : "Edit Organizations";
+    Layout = "~/Views/Shared/_InsideLayout.cshtml";
+}
+@model StudyId.Models.Dto.Admin.Organizations.OrganizationDto?
+@section Scripts
+{
+    @if (Model != null)
+    {
+        <script type="text/javascript">
+            var model = @Html.ToJson(Model);
+        </script>
+    }
+        <script asp-append-version="true" src="~/js/controllers/organizations/vue-organizations-edit.js"></script>
+}
+<div id="organization-edit" class="container">
+    <div class="alert alert-danger" v-if="error!=null && error!=''">{{error}}</div>
+    <div class="course__breadcrumb breadcrumb">
+        <ul class="breadcrumb__list">
+            <li class="breadcrumb__item">
+                <a href="@Url.Action("Index")" class="breadcrumb__link">Organizations </a>
+            </li>
+            <li class="breadcrumb__item">
+                <span class="breadcrumb__current">
+                    <i class="fa-solid fa-screen-users"></i>
+                    <span v-if="id==null">Create Organization</span>
+                    <span v-if="id!=null">Edit Organization:<strong>{{title}}</strong></span>
+                </span>
+            </li>
+        </ul>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <p class="text-white col-12 bg-info text-white text-center p-3" style="border-radius: 3px;"> Company Information <i class="fa-solid fa-buildings"></i></p>
+            <br />
+            <div class="row mb-2">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="mb-2">Title</label>
+                        <input type="email" class="form-control shadow-none" v-model="$v.title.$model" v-bind:class="{'is-invalid':$v.title.$error }" v-bind:disabled="loader" />
+                        <div class="error form__error" v-if="$v.title.$error && !$v.title.required">
+                            This field is required
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="mb-2">Tax Number</label>
+                        <input type="email" class="form-control shadow-none" v-model="$v.taxNumber.$model" v-bind:class="{'is-invalid':$v.taxNumber.$error }" v-bind:disabled="loader" />
+                        <div class="error form__error" v-if="$v.taxNumber.$error && !$v.taxNumber.required">
+                            This field is required
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-2 mt-4">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="mb-2">Address</label>
+                        <input type="text" class="form-control shadow-none" v-model="$v.address.$model" v-bind:class="{'is-invalid':$v.address.$error }" v-bind:disabled="loader" />
+                        <div class="error form__error" v-if="$v.address.$error && !$v.address.required">
+                            This field is required
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="mb-2">Company Phone Number</label>
+                        <input type="number" class="form-control shadow-none" v-model="$v.phone.$model" v-bind:class="{'is-invalid':$v.phone.$error }" v-bind:disabled="loader" />
+                        <div class="error form__error" v-if="$v.phone.$error && !$v.phone.required">
+                            This field is required
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-2 mt-4">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="mb-2">Organization Email</label>
+                        <input type="text" name="Email" class="form-control shadow-none" v-model="$v.organizationEmail.$model" v-bind:class="{'is-invalid':$v.organizationEmail.$error }" v-bind:disabled="loader" />
+                        <div class="error form__error" v-if="$v.organizationEmail.$error && !$v.organizationEmail.required">
+                            This field is required
+                        </div>
+                        <div class="error form__error" v-if="$v.organizationEmail.$error && !$v.organizationEmail.email">
+                            Wrong email format
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="mb-2">Start Date</label>
+                        <div class="">
+                            <date-picker v-model="startDate" format="DD/MM/YYYY"
+                                         type="date"
+                                         placeholder="Select date" input-class="form-control shadow-none"></date-picker>
+                            <div class="error form__error" v-if="$v.startDate.$error && !$v.startDate.required">
+                                This field is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-2 mt-4">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="mb-2">Document</label>
+                       
+                        <input multiple type="file" class="form-control shadow-none" v-on:change="vadded"  accept=".odt,.wpd,.tex,.rtf,.pdf,.doc,.docx,.txt,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"/>
+                        <div class="error form__error" v-if="$v.document.$error && !$v.document.required">
+                            This field is required
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="mb-2">Status</label>  
+                        <v-select :options="statuses" label="title" :reduce="item => item.value" v-model="status"></v-select> 
+                        <div class="error form__error" v-if="$v.status.$error && !$v.status.required">
+                            This field is required
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div v-if="id!=null" style="margin-bottom: 15px;">
+                <br/>
+                <ul style="padding: 0 25px; margin: 0;">
+                    <li v-for="(item,index) in document" class="row mb-3 p-2 justify-content-between" style="border: 1px solid #C1C1C1;  border-radius: 3px;">
+                        <a v-on:click="downloadFile" class="col-4 text-decoration-none" style="cursor: pointer;">{{$v.document.$model[index].Name}}</a>
+                        <i class="fa-solid fa-download col-4 text-end" style="margin-left: 15px;"></i>
+                    </li>
+                </ul>
+                <br/>
+            </div>
+            <div id="downloadedfiles" class="row p-2" style="display: none;">
+                <ul style="padding: 0 25px; margin: 0;">
+                    <li v-for="(item,index) in document" class="row mb-3 p-2 justify-content-between" style="border: 1px solid #C1C1C1;  border-radius: 3px;">
+                      @*  <a v-on:click="deleteFile" class="col-4 text-decoration-none" style="cursor: pointer;">{{item.name}}</a>*@
+                      <a class="col-4 icon-button" style="font-size: 15px;" v-on:click="deleteFile" :reduse="item => item.name" value="ite.name">  {{item.name}}  </a>
+                      <i class="col-4 fa-solid fa-trash text-danger text-end"></i>
+                    </li>
+                </ul>
+                <br/>
+            </div>
+        </div>
+        <div class="card-body" style="padding-top: 0;">
+            <p class="text-white col-12 bg-info text-white text-center p-3" style="border-radius: 3px;"> Person Information <i class="fa-solid fa-memo-circle-info"></i></p>
+            <br />
+            <div class="card border-0">
+                <div class="border-1 border-success" v-for="(item,index) in orgPeople">
+                    <div class="row mb-2">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="mb-2">First Name</label>
+                                <input type="email" class="form-control shadow-none" v-model="$v.orgPeople.$model[index].FirstName" v-bind:class="{'is-invalid':$v.orgPeople.$each[index].FirstName.$error }" v-bind:disabled="loader"/>
+                                <div class="error form__error" v-if="($v.orgPeople.$each[index].FirstName.$error && !$v.orgPeople.$each[index].FirstName.required)">
+                                    This field is required
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="form-group">
+                                <label class="mb-2">Last Name</label>
+                                <input type="email" class="form-control shadow-none" v-model="$v.orgPeople.$model[index].LastName" v-bind:class="{'is-invalid':$v.orgPeople.$each[index].LastName.$error }" v-bind:disabled="loader"/>
+                                <div class="error form__error" v-if="$v.orgPeople.$each[index].LastName.$error && !$v.orgPeople.$each[index].LastName.required">
+                                    This field is required
+                                </div>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-trash-can fa-xl col-1 icon-button" v-bind:disabled="loader" v-on:click="removePerson(item);" style="margin-top: 15px;"></i>
+                    </div>
+                    <div class="row mb-2 mt-4">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="mb-2">Email</label>
+                                <input type="email" class="form-control shadow-none" v-model="$v.orgPeople.$model[index].Email" v-bind:class="{'is-invalid':$v.orgPeople.$each[index].Email.$error }" v-bind:disabled="loader"/>
+                                <div class="error form__error" v-if="$v.orgPeople.$each[index].Email.$error && !$v.orgPeople.$each[index].Email.required">
+                                    This field is required
+                                </div>
+                                <div class="error form__error" v-if="$v.orgPeople.$each[index].Email.$error && !$v.orgPeople.$each[index].Email.email">
+                                     Wrong email format
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="form-group">
+                                <label class="mb-2">Phone number</label>
+                                <input type="number" class="form-control shadow-none" v-model="$v.orgPeople.$model[index].Phone" v-bind:class="{'is-invalid':$v.orgPeople.$each[index].Phone.$error }" v-bind:disabled="loader"/>
+                                <div class="error form__error" v-if="$v.orgPeople.$each[index].Phone.$error && !$v.orgPeople.$each[index].Phone.required">
+                                    This field is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-2 mt-4">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="mb-2">Position</label>
+                                <input type="email" class="form-control shadow-none" v-model="$v.orgPeople.$model[index].Position" v-bind:class="{'is-invalid':$v.orgPeople.$each[index].Position.$error }" v-bind:disabled="loader"/>
+                                <div class="error form__error" v-if="$v.orgPeople.$each[index].Position.$error && !$v.orgPeople.$each[index].Position.required">
+                                    This field is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <hr/>
+                    <br/>
+                </div> 
+                <button class="btn btn-sm btn-warning" v-bind:disabled="loader" v-on:click="addPerson();"><i class="fa-solid fa-plus-large"></i> Click to add Person </button>
+            </div>
+            <div class="error form__error text-center" v-if="$v.orgPeople.$error && !$v.orgPeople.required">
+                This field is required
+            </div>
+        </div>
+        <div class="card-body">
+            <p class="text-white col-12 bg-info text-white text-center p-3" style="border-radius: 3px;"> Courses <i class="fa-solid fa-memo-circle-info"></i></p>
+            <br />
+            <div class="card border-0">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th class="col-3">Course</th>
+                        <th class="col-3">Local Name</th>
+                        <th class="col-2">Duration</th>
+                        <th class="col-2">Price</th>
+                        <th class="col-1"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(item,index) in orgCourses">
+                        <td class="col">
+                            @* <v-select  append-to-body :clearable="false"  :options="inviteRoles" placeholder="Role" v-bind:disabled="loader" label="title" :reduce="item => item.value" v-model="item.role"></v-select>*@
+                            <select class="form-select" aria-label="Title" v-model="$v.orgCourses.$model[index].CourseId" v-bind:disabled="loader">
+                                <option v-for="item in courses" v-bind:value="item.id">
+                                    {{item.title}}
+                                </option>
+                            </select>
+                        </td>
+                        <td class="col">
+                            <input type="text" class="form-control shadow-none" v-model="$v.orgCourses.$model[index].LocalName" v-bind:class="{'is-invalid':$v.orgCourses.$each[index].LocalName.$error }" v-bind:disabled="loader" />
+                            <div class="error form__error" v-if="($v.orgCourses.$each[index].LocalName.$error && !$v.orgCourses.$each[index].LocalName.required)">
+                                This field is required
+                            </div>
+                        </td>
+                        <td class="col">
+                            <input type="number" class="form-control shadow-none" v-model="$v.orgCourses.$model[index].Duration" v-bind:class="{'is-invalid':$v.orgCourses.$each[index].Duration.$error }" v-bind:disabled="loader" />
+                            <div class="error form__error" v-if="($v.orgCourses.$each[index].Duration.$error && !$v.orgCourses.$each[index].Duration.required)">
+                                This field is required
+                            </div>
+                        </td>
+                        <td class="col">
+                            <input type="number" class="form-control shadow-none" v-model="$v.orgCourses.$model[index].Price" v-bind:class="{'is-invalid':$v.orgCourses.$each[index].Price.$error }" v-bind:disabled="loader" />
+                            <div class="error form__error" v-if="($v.orgCourses.$each[index].Price.$error && !$v.orgCourses.$each[index].Price.required)">
+                                This field is required
+                            </div>
+                        </td>
+                        <td class="col-1">
+                            <i class="fa-solid fa-trash-can fa-xl icon-button" v-bind:disabled="loader" v-on:click="removeCourse(item);" style="margin-top: 15px;"></i>
+                        </td>
+                    </tr>
+                    <tr class="mt-4">
+                        <td colspan="5">
+                            <button class="btn btn-sm btn-success" v-bind:disabled="loader" v-on:click="addCourse();"><i class="fa-solid fa-plus-large"></i></button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="error form__error text-center" v-if="$v.orgCourses.$error && !$v.orgCourses.required">
+                This field is required
+            </div>
+            <br/><br/>  
+            <div v-if="success && id==null" class="alert alert-success mt-1">The organization was successfully created. </div>
+            <div v-if="success && id!=null" class="alert alert-success mt-1">The organization was successfully updated. </div>
+            <div class="row">
+                <div class="col-12 d-inline-flex justify-content-end">
+                    <button class="btn btn-success text-white" v-bind:disabled="loader" v-on:click="create();" v-if="id==null">
+                        <div class="spinner-border spinner-border-sm text-white" role="status" v-if="loader">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <i class="fa-solid fa-floppy-disk" v-if="!loader"></i> Create
+                    </button>
+                    <button class="btn btn-info text-white" v-bind:disabled="loader" v-on:click="edit();" v-if="id!=null">
+                        <div class="spinner-border spinner-border-sm text-white" role="status" v-if="loader">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <i class="fa-solid fa-floppy-disk" v-if="!loader"></i> Edit
+                    </button>
+                    <a href="@Url.Action("Index", "Organizations")" class="btn" style="margin-left: 10px;"><i class="fa-solid fa-arrow-left-long"></i> Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

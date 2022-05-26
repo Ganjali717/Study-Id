@@ -1,0 +1,204 @@
+﻿@using StudyId.WebApplication.Extensions
+@{
+    ViewData["Title"] = "Manage Applications on the StudyId";
+    Layout = "~/Views/Shared/_InsideLayout.cshtml";
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        var role = @Html.ToJson(User.Identity.GetClaimRole());
+    </script>
+    <script src="~/js/controllers/applications/vue-applications-list.js"></script>
+}
+<div id="applications-list" class="container">
+    <div class="alert alert-danger" v-if="error!=null && error!=''">{{error}}</div>
+    <div class="course__breadcrumb breadcrumb">
+        <ul class="breadcrumb__list">
+            <li class="breadcrumb__item">
+                <a href="@Url.Action("Index")" class="breadcrumb__link">Applications </a>
+            </li>
+            <li class="breadcrumb__item">
+                <span class="breadcrumb__current">
+                    <i class="fa-solid fa-screen-users"></i> List of Applications
+                </span>
+            </li>
+        </ul>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <div class="row mt-1 justify-content-end">
+                <div class="col-3">
+                    <a class="btn btn-info text-white w-100" href="@Url.Action("Create")"><i class="fa-solid fa-plus"></i> Create Application</a>
+                </div>
+            </div>
+            <br/>
+            <div class="row mt-1 justify-content-end">
+                <div class="col-4">
+                    <date-picker v-model="from" format="DD/MM/YYYY"
+                                 type="date"
+                                 placeholder="From" input-class="form-control shadow-none"></date-picker>
+                </div>
+                <div class="col-4">
+                    <date-picker v-model="to" format="DD/MM/YYYY"
+                                 type="date"
+                                 placeholder="To" input-class="form-control shadow-none"></date-picker>
+                </div>
+
+                <div class="col-4">
+                    <v-select :options="statuses"  label="title" :reduce="item => item.value" v-model="status" placeholder="Status"></v-select>
+                </div>
+               
+            </div>
+            <br/>
+            <div class="row mt-1">
+                <div class="col-4">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <input type="text" class="form-control shadow-none" placeholder="Search by Full Name or Email" aria-label="Search by Name or Email" aria-describedby="basic-addon1" v-model="q" v-on:input="debounceSearch">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <v-select multiple :options="courses" label="title" :reduce="item => item.id" v-model="course" placeholder="Course"></v-select>
+                </div>
+                <div class="col-4">
+                    <v-select :options="isAustralianItems" label="title" :reduce="item => item.value" v-model="isAustralian" placeholder="Resident"></v-select>
+                </div>
+            </div>
+
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th class="col" style="width: 3%;">#</th>
+                        <th scope="col" v-on:click="sortingBy('LastName,FirstName')" class="icon-button">
+                            Name
+                            <i class="fa-solid" v-show="sortBy=='LastName,FirstName'" :class="{'fa-arrow-down-1-9':sortAsc, 'fa-arrow-up-9-1':!sortAsc}"></i>
+                        </th>
+                        <th scope="col" v-on:click="sortingBy('Email')" class="icon-button col-2">
+                            Email
+                            <i class="fa-solid" v-show="sortBy=='Email'" :class="{'fa-arrow-down-1-9':sortAsc, 'fa-arrow-up-9-1':!sortAsc}"></i>
+                        </th>
+                        <th scope="col" v-on:click="sortingBy('Phone')" class="icon-button col-1">
+                            Phone
+                            <i class="fa-solid" v-show="sortBy=='Phone'" :class="{'fa-arrow-down-1-9':sortAsc, 'fa-arrow-up-9-1':!sortAsc}"></i>
+                        </th>
+                        <th scope="col" v-on:click="sortingBy('StartDate')" class="icon-button" style="width: 11%;">
+                            Start Date
+                            <i class="fa-solid" v-show="sortBy=='StartDate'" :class="{'fa-arrow-down-1-9':sortAsc, 'fa-arrow-up-9-1':!sortAsc}"></i>
+                        </th>
+                        <th scope="col" v-on:click="sortingBy('AustralianResident')" class="icon-button" style="width: 5%;">
+                            Res.
+                            <i class="fa-solid" v-show="sortBy=='AustralianResident'" :disabled="true" :class="{'fa-arrow-down-1-9':sortAsc, 'fa-arrow-up-9-1':!sortAsc}"></i>
+                        </th>
+                        <th scope="col" style="width: 15%">
+                            Course
+                        </th>
+                        <th style="width: 10%;">
+                            Status
+                        </th>
+                        <th scope="col" v-on:click="sortingBy('Created')" class="icon-button col-2"  style="width: 10%;">
+                            Created
+                            <i class="fa-solid" v-show="sortBy=='Created'" :class="{'fa-arrow-down-1-9':sortAsc, 'fa-arrow-up-9-1':!sortAsc}"></i>
+                        </th>
+                        <th style="width: 10%;" class="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(item,index) in items" v-bind:class="{'table-info':item.status=='Invited'}">
+                        <th>{{index+(itemsCount*(pageCurrent-1))+1}}</th>
+                        <td>{{item.firstName}} {{item.lastName}} </td>
+                        <td>{{item.email}}</td>
+                        <td>{{item.phone}}</td>
+                        <td>{{item.startDate}}</td>
+                        <td>
+                            <input type="checkbox" v-model="item.australianResident" :disabled="true"/>
+                        </td>
+                        <td>
+                            {{item.courseName}}
+                        </td>
+                        <td>
+                            <select class="form-select" aria-label="Role" v-model="item.status" v-on:change="changeStatus(item)">
+                                <option v-for="stat in listStatus" v-bind:value="stat.value">
+                                    {{stat.title}}
+                                </option>
+                            </select>
+                        </td>
+                        <td>{{item.created}}</td>
+                        <td class="text-end">
+                            <a v-if="item.hubSpotContactId!=null && item.hubSpotDealId!=null" :href="'https://app.hubspot.com/contacts/3445426/deal/'+item.hubSpotDealId" style="margin-left: 3px;" class="icon-button text-success"><i class="fab fa-hubspot"></i></a>
+                            <a :href="'/applications/copyapp/'+item.id" class="icon-button text-info"><i class="fa-solid fa-copy"></i></a>
+                            @*<a :href="'/applications/edit/'+item.id" class="icon-button text-warning"><i class="fab fa-hubspot"></i></a>*@
+                            <i class="fa-solid fa-trash-can icon-button" style="margin-left: 3px;" v-on:click="removePopup(item);" v-if="role=='Admin'"></i>
+                        </td>
+                    </tr>
+                    <tr v-if="items.length==0 && !loader">
+                        <td colspan="7" class="text-center">There are no records.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row mt-2">
+                <ul class="pagination mt-1">
+                    <li v-show="pagesBlocks >1">
+                        <button class="page-link" title="Scroll to the first ten pages" :disabled="pagesBlock==1" v-on:click="pageBlockShiftTop(-1)"><i class="fa fa-angle-double-left"></i></button>
+                    </li>
+                    <li v-show="pagesBlocks >1">
+                        <button class="page-link" title="(Alt+[) Scroll pages backward" :disabled="pagesBlock==1" accesskey="[" v-on:click="pageBlockShift(-1)"><i class="fa fa-angle-left"></i></button>
+                    </li>
+                    <li v-for="page in pages" v-show="page >= (pagesBlock-1) * pagesInPageBlock && page <= ((pagesBlock-1) * pagesInPageBlock + pagesInPageBlock)"
+                        class="page-item" v-bind:class="{active:page==pageCurrent}">
+                        <button href="#" class="page-link" v-on:click="setPage(page);">{{page}}</button>
+                    </li>
+                    <li v-show="pagesBlocks >1">
+                        <button class="page-link" title="(Alt+]) Scroll pages forward" v-on:click="pageBlockShift(1)" accesskey="]"><i class="fa fa-angle-right"></i></button>
+                    </li>
+                    <li v-show="pagesBlocks >1">
+                        <button class="page-link" title="Scroll to the last ten pages" v-on:click="pageBlockShiftTop(1)"><i class="fa fa-angle-double-right"></i></button>
+                    </li>
+                </ul>
+            </div>
+            <div class="row mt-1">
+                <div class="d-inline-flex justify-content-start">
+                    <div class="pagination-items-count mb-3 col-1">
+                        <select class="form-select col-12" style="font-size: 14px;" v-model="itemsCount" v-on:change="changeItemsCount()">
+                            <option v-for="item in itemsCountSelect" v-bind:value="item">
+                                {{item}}
+                            </option>
+                        </select>
+
+                    </div>
+                    <div class="spinner-border text-info m-1" role="status" v-if="loader">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Modal Remove Account Popup -->
+    <div class="modal fade" id="remove-application" tabindex="-1" aria-hidden="true" v-if="operationalItem!=null">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Remove Application</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" v-bind:disabled="operationalLoader"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to remove application: <span class="text-violet">-{{operationalItem.firstName}} {{operationalItem.lastName}}</span>
+                    <div class="alert alert-danger m-1" v-if="operationalError!=null">{{operationalError}}</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" v-bind:disabled="operationalLoader">Close</button>
+                    <button type="button" class="btn btn-danger" v-bind:disabled="operationalLoader" v-on:click="remove();">
+                        <div class="spinner-border spinner-border-sm text-white" role="status" v-if="operationalLoader">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <i class="fa-solid fa-trash-can" v-show="!operationalLoader"></i> Remove
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

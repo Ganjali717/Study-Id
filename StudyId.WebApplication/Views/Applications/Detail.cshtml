@@ -1,0 +1,150 @@
+﻿@using Microsoft.Build.Framework
+@using StudyId.WebApplication.Extensions
+@{
+    ViewData["Title"] = Model==null ?  "Create Application" : "Edit Application";
+    Layout = "~/Views/Shared/_InsideLayout.cshtml";
+}
+@model StudyId.Models.Dto.Applications.ApplicationDto?
+@section Scripts
+{
+    @if (Model != null)
+    {
+        <script type="text/javascript">
+            var model = @Html.ToJson(Model);
+        </script>
+    }
+    <script type="text/javascript">
+        var role = @Html.ToJson(User.Identity.GetClaimRole());
+    </script>
+    <script asp-append-version="true" src="~/js/controllers/applications/vue-applications-detail.js"></script>
+}
+
+<div id="application-detail" class="container">
+    <div class="alert alert-danger" v-if="error!=null && error!=''">{{error}}</div>
+    <div class="course__breadcrumb breadcrumb">
+        <ul class="breadcrumb__list">
+            <li class="breadcrumb__item">
+                <a href="@Url.Action("Index")" class="breadcrumb__link">Applications </a>
+            </li>
+            <li class="breadcrumb__item">
+                <span class="breadcrumb__current">
+                    <i class="fa-solid fa-screen-users"></i>
+                    <span v-if="id!=null">Application Detail - {{firstName}} {{lastName}} : </span> {{ selectedCourses[0] }}
+                </span>
+            </li>
+        </ul>
+    </div>
+    <div class="card border-0">
+        <div class="card-body text-end">
+            <ul class="p-0" style="font-size: 12px;">
+                <li><b>Created: </b> {{created}}</li>
+                <br />
+                <li><b>Updated: </b> {{updated}}</li>
+            </ul>
+        </div>
+    </div>
+    <div class="card">
+        
+        <div class="card-body">
+            <h1 class="text-white col-12 text-start text-black-50" style="border-radius: 5px;">In Progress</h1>
+            <hr/>
+            <div class="row mb-1 justify-content-around">
+                <div class="col-5">
+                    <ul class="p-0">
+                        <li><b class="text-primary">Name: </b>{{firstName}} {{lastName}}</li>
+                        <br/>
+                        <li><b class="text-primary">Email: </b>{{email}}</li>
+                        <br/>
+                        <li><b class="text-primary">Residency:</b> {{australianResident}}</li>
+                    </ul>
+                </div>
+                <div class="col-5">
+                    <ul>
+                        <li><b class="text-primary">Course: </b> {{ selectedCourses[0] }} </li>
+                        <br/>
+                        <li><b class="text-primary">Start Date: </b> {{startDate}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="card" style="border-bottom: none;">
+        <div class="card-body p-0">
+            <ul class="nav nav-tabs w-100" id="myTab" role="tablist">
+                <li class="nav-item col-3" role="presentation">
+                    <button class="nav-link active p-4 w-100" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Enrollment Details</button>
+                </li>
+                <li class="nav-item col-3" role="presentation">
+                    <button class="nav-link p-4 w-100" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Additional Info</button>
+                </li>
+                <li class="nav-item col-3" role="presentation">
+                    <button class="nav-link p-4 w-100" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Tasks</button>
+                </li>
+                <li class="nav-item col-3" role="presentation">
+                    <button class="nav-link p-4 w-100" id="document-tab" data-bs-toggle="tab" data-bs-target="#document" type="button" role="tab" aria-controls="contact" aria-selected="false">Documents</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="card" style="border-top: none !important; height: 500px; border-radius: 0;">
+        <div class="card-body">
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">..sgsasgsgadssgasdga.</div>
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                    <div class="col-12 text-end">
+                        <a class="btn btn-primary" href="@Url.Action("Edit","Tasks")"> <i class="fa-solid fa-plus"></i> Add Task</a>
+                    </div>
+                    <br/><br/>
+                    <ul id="example-1" class="p-0">
+                        <li v-for="item in eachTask" :key="item.id" class=" mb-2" style="border: 1px solid #D7D7D7; border-radius: 5px;">
+                            <div class="row align-items-center justify-content-around p-2">
+                                <div class="col-5">
+                                    <a > <i class="fa-light fa-circle-plus"></i></a>  {{firstName}} {{lastName}} : {{item.title}}
+                                </div>
+                                <div class="col-2">
+                                    {{ item.dueDate }}
+                                </div>
+                                <div class="col-3 text-end">
+                                    <i class="fa-solid fa-trash-can-list icon-button" style="margin-left: 3px;" v-on:click="removePopup(item);" v-if="role=='Admin'" ></i>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-pane fade" id="document" role="tabpanel" aria-labelledby="document-tab">...</div>
+            </div>
+        </div>
+    </div>
+    <br/><br/>
+    <div class="row p-2">
+        <div class="col-12 d-inline-flex justify-content-end">
+            <a href="@Url.Action("Index","Applications")" class="btn" style="margin-left: 10px;"><i class="fa-solid fa-arrow-left-long"></i> Back</a>
+        </div>
+    </div>
+    <!-- Modal Remove Account Popup -->
+    <div class="modal fade" id="remove-tasks-application" tabindex="-1" aria-hidden="true" v-if="operationalItem!=null">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Remove Task</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" v-bind:disabled="operationalLoader"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to remove task: <span class="text-violet">-{{operationalItem.title}} </span>
+                    <div class="alert alert-danger m-1" v-if="operationalError!=null">{{operationalError}}</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" v-bind:disabled="operationalLoader">Close</button>
+                    <button type="button" class="btn btn-danger" v-bind:disabled="operationalLoader" v-on:click="remove();">
+                        <div class="spinner-border spinner-border-sm text-white" role="status" v-if="operationalLoader">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <i class="fa-solid fa-trash-can" v-show="!operationalLoader"></i> Remove
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

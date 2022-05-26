@@ -1,0 +1,65 @@
+﻿@model StudyId.Models.Dto.Auth.InviteRegisterDto
+@using StudyId.WebApplication.Extensions
+@{
+    ViewData["Title"] = "Finish your registration process";
+    Layout = "~/Views/Shared/_InsideLayout.cshtml";
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        var model = @Html.ToJson(Model);
+    </script>
+<script src="/js/controllers/auth/vue-auth-invite.js" type="module"></script>
+}
+<div id="invite-app" class="contact__row2 align-middle" style="margin-top:6%">
+    <div class="contact__form-wrap">
+        <div class="form__title">
+            Finish your registration process
+        </div>
+        <div class="form__subtitle">
+            Please, fill your personal info and password for finish registration.
+        </div>
+        <div class="form__items">
+            <div class="form__item">
+                <input autocomplete="off" type="text" name="FirstName" placeholder="First Name *" class="input form__input" v-model.trim="$v.firstName.$model">
+
+                <div class="error form__error" v-if="$v.firstName.$error && !$v.firstName.required">
+                    This field is required
+                </div>
+            </div>
+            <div class="form__item">
+                <input autocomplete="off" type="text" name="LastName" placeholder="Last Name *" class="input form__input" v-model.trim="$v.lastName.$model">
+
+                <div class="error form__error" v-if="$v.lastName.$error && !$v.lastName.required">
+                    This field is required
+                </div>
+            </div>
+            <div class="form__item">
+                <input autocomplete="off" type="password" name="Password" data-error="Error" placeholder="Password*" class="input form__input" v-model.trim="$v.password.$model">
+
+                <div class="error form__error" v-if="$v.password.$error && !$v.password.required">
+                    This field is required
+                </div>
+            </div>
+            <div class="form__item">
+                <input autocomplete="off" type="password" name="ConfirmPassword" data-error="Error" placeholder="Confirm Password *" class="input form__input" v-model.trim="$v.confirmPassword.$model">
+
+                <div class="error form__error" v-if="$v.confirmPassword.$error && !$v.confirmPassword.required">
+                    This field is required
+                </div>
+                <div class="error form__error" v-if="$v.confirmPassword.$error && !$v.confirmPassword.pwdmatch">
+                    The passwords are not match.
+                </div>
+            </div>
+            <div class="form__item" v-if="error!=null && error!=''">
+                <div class="alert alert-danger">{{error}}</div>
+            </div>
+            <button class="button form__button" v-on:click="register();">
+                <span class="spinner-border spinner-border-sm text-light m-1" v-if="loader"></span>
+                <span><i class="fa-solid fa-arrow-right-to-arc" v-if="!loader"></i> Register</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+

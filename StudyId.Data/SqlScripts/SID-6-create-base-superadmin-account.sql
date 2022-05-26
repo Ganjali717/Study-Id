@@ -1,0 +1,20 @@
+﻿INSERT INTO [dbo].[Accounts]
+           ([Id]
+           ,[Email]
+           ,[FirstName]
+           ,[LastName]
+           ,[Role]
+           ,[Password]
+           ,[SecurityTocken]
+           ,[SecurityTockenExpired]
+           ,[Created])
+     VALUES
+           ('0e49252e-b662-4133-9fab-1cdfd32d45d3'
+           ,'admin@study-id.com'
+           ,'Study'
+           ,'Id'
+           ,1
+           ,'fbbc6d3570518b94c606fe2c3b2b6aacba15abfb8b507a408e58af5fc043d6be'
+           ,''
+           ,SYSDATETIMEOFFSET()
+           ,SYSDATETIMEOFFSET())

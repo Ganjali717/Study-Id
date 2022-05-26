@@ -1,0 +1,641 @@
+﻿@model StudyId.Models.Dto.Home.HomeDto
+@{
+    ViewData["Title"] = "StudyId - this is your opportunity to get a visa to study and travel in australia";
+    ViewData["Description"] = "We are an educational agency that facilitates studying in Australia for both foreign and domestic students. We support you during the whole period of your journey. This includes student visa in Australia, accommodations, travel insurance, and selecting the optimal courses to fit your needs.";
+    ViewData["Canonical"] = Url.Action("Index", "Home");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="top">
+    <div class="top__container">
+        <div class="top__row">
+            <div class="top__content">
+                <h1 class="top__title">
+                    Study in <span class="top__title-decor">Australia</span>
+                </h1>
+                <div class="top__descr">
+                    and get ready for the most exciting time of your life!
+                </div>
+                <a data-da=".top__row,768,3" href="@Url.Action("ContactUs")" class="button top__button">Аdmissions process</a>
+            </div>
+            <div class="top__image-block">
+                <picture><source srcset="@Url.Content("/img/top/banner50.webp")" type="image/webp"><img data-src="@Url.Content("/img/top/banner50.webp")" width="100%" height="100%" alt="Study in Australia"></picture>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="benefit padding">
+    <div class="benefit__container">
+        <div class="benefit__grid-layout">
+            <div class="benefit__item item-benefit">
+                <span class="item-benefit__decor"></span>
+                <div class="item-benefit__image-wrap item-benefit__image-wrap_blue">
+                    <div class="item-benefit__image">
+                        <img data-src="@Url.Content("/img/benefit/01.svg")" width="100%" height="100%" alt="Overseas Education and Study Visa Consultants">
+                    </div>
+                </div>
+                <div class="item-benefit__content">
+                    <div class="item-benefit__title">
+                        Overseas Education and Study Visa Consultants
+                    </div>
+                    <div class="item-benefit__text">
+                        We are a team of experts that understands how to access student visa pathways for
+                        international students.
+                    </div>
+                </div>
+            </div>
+            <div class="benefit__item item-benefit">
+                <span class="item-benefit__decor"></span>
+                <div class="item-benefit__image-wrap item-benefit__image-wrap_red">
+                    <div class="item-benefit__image">
+                        <img data-src="@Url.Content("/img/benefit/02.svg")" width="100%" height="100%" alt="Guaranteed Admission in Top Training Organizations">
+                    </div>
+                </div>
+                <div class="item-benefit__content">
+                    <div class="item-benefit__title">
+                        Guaranteed Admission in Top Training Organizations
+                    </div>
+                    <div class="item-benefit__text">
+                        We will assist you towards a successful application.
+                    </div>
+                </div>
+            </div>
+            <div class="benefit__item item-benefit">
+                <span class="item-benefit__decor"></span>
+                <div class="item-benefit__image-wrap item-benefit__image-wrap_green">
+                    <div class="item-benefit__image">
+                        <img data-src="@Url.Content("/img/benefit/03.svg")" width="100%" height="100%" alt="No External IELTS Required for Australian Study Visa">
+                    </div>
+                </div>
+                <div class="item-benefit__content">
+                    <div class="item-benefit__title">
+                        No External IELTS Required for Australian Study Visa
+                    </div>
+                    <div class="item-benefit__text">
+                        We work with prestige organisations, in which the admissions process does not require
+                        IELTS.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="certificate padding">
+    <div class="certificate__container">
+        <div class="certificate__slider swiper">
+            <div class="certificate__wrapper swiper-wrapper">
+                <div class="certificate__slide swiper-slide">
+                    <div class=" card">
+                        <div class="card__row">
+                            <div class="card__left card__left_blue">
+                                <div class="card__block">
+                                    <div class="card__content " data-swiper-parallax="-300">
+                                        <h2 class="card__title">
+                                            <a href="@Url.Action("Business")"> Business</a>
+                                        </h2>
+                                        <p class="card__list">
+                                            These courses cater to business executives, program consultants, and program coordinators. Individuals who already have substantial experience in their respective fields, but wish to augment their knowledge. Students who do not have this extensive business background, are encouraged to participate in this program. They must have a solid theoretical background, and a desire to learn from these experienced students. The topics that will be covered in this faculty are business administration, human resources, and business operations.
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="card__right " data-swiper-parallax="-400">
+                                <div class="card__image-ibg">
+                                    <picture><source srcset="img/faculty/01.webp" type="image/webp"><img data-src="img/faculty/01.jpg" alt="Image"></picture>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="certificate__slide swiper-slide">
+                    <div class="card">
+                        <div class="card__row card__row_reverse">
+                            <div class="card__left card__left_green">
+                                <div class="card__block">
+                                    <div class="card__content" data-swiper-parallax="-300">
+                                        <h2 class="card__title">
+                                            <a href="@Url.Action("DigitalMediaAndInformationTechnology","Home")"> Digital Media & Information Technology</a>
+
+                                        </h2>
+                                        <p class="card__list">
+                                            Today technology is vital to the success of individuals and societies in general. Social media platforms have united our world like never before. Understanding this and utilizing technology is fundamental to ones success in business and in one’s career. This program prepares our students and gives them the necessary skills to be successful. We teach networking, information technology, programming, digital media, business analysis, and web technologies. We offer programs, workshops, and seminars which will give you a competitive advantage. In today’s business world.
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="card__right" data-swiper-parallax="-400">
+                                <div class="card__image-ibg">
+                                    <picture><source srcset="img/faculty/02.webp" type="image/webp"><img data-src="img/faculty/02.jpg" alt="Image"></picture>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="certificate__slide swiper-slide">
+                    <div class=" card">
+                        <div class="card__row ">
+                            <div class="card__left card__left_red">
+                                <div class="card__block">
+                                    <div class="card__content" data-swiper-parallax="-400">
+                                        <h2 class="card__title">
+                                            <a href="@Url.Action("EarlyChildhoodEducationAndCare","Home")"> Early Childhood Education & Care</a>
+                                        </h2>
+                                        <p class="card__list">
+                                            This program teaches our students how to become child care providers and educators. It prepares our students to enter this competitive field with the skills necessary to succeed. The focus is on the child’s wellbeing, learning, and development. The program facilitates the national quality standards, and prepares our students to work in various settings.
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="card__right" data-parallax="-500">
+                                <div class="card__image-ibg">
+                                    <picture><source srcset="img/faculty/03.webp" type="image/webp"><img data-src="img/faculty/03.jpg" alt="Image"></picture>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="certificate__slide swiper-slide">
+                    <div class=" card">
+                        <div class="card__row card__row_reverse ">
+                            <div class="card__left card__left_blue">
+                                <div class="card__block">
+                                    <div class="card__content" data-swiper-parallax="-400">
+                                        <h2 class="card__title">
+                                            <a href="@Url.Action("English","Home")"> English</a>
+                                        </h2>
+                                        <p class="card__list">
+                                            We are keenly aware that our students possess varying skills with respect to the English language. We therefore offer different modules that assist you in improving your understanding of the English language. Our courses prepare you for the requirements of studying in various institutions, as well as the IELTS proficiency test that are required by some educational institutions. These modules and courses, will also prepare you for everyday interactions while living in Australia.
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="card__right" data-parallax="-500">
+                                <div class="card__image-ibg">
+                                    <picture><source srcset="img/faculty/04.webp" type="image/webp"><img data-src="img/faculty/04.jpg" alt="Image"></picture>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="certificate__slide swiper-slide">
+                    <div class=" card">
+                        <div class="card__row  ">
+                            <div class="card__left card__left_green">
+                                <div class="card__block">
+                                    <div class="card__content" data-swiper-parallax="-400">
+                                        <h2 class="card__title">
+                                            <a href="@Url.Action("EnvironmentManagementSustainability","Home")"> Environment Management & Sustainability</a>
+                                        </h2>
+                                        <p class="card__list">
+                                            In studying the science of sustainability we typically focus on three areas (environmental, economic, and social). The courses in sustainable operations will deal with all three of these areas. It is by partnering with various organizations, that we will give you the necessary knowledge and skills to have a successful career in sustainable operations.
+                                        </p>
+                                        <br />
+                                        <p class="card__list">
+                                            With the growing threats and challenges that are posed to our environment from climate change. Our graduates in sustainable operations are poised to have an immediate and positive impact in finding solutions to this crises.
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="card__right" data-parallax="-500">
+                                <div class="card__image-ibg">
+                                    <picture><source srcset="img/faculty/05.webp" type="image/webp"><img data-src="img/faculty/05.jpg" alt="Image"></picture>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="certificate__slide swiper-slide">
+                    <div class=" card">
+                        <div class="card__row card__row_reverse ">
+                            <div class="card__left card__left_red">
+                                <div class="card__block">
+                                    <div class="card__content" data-swiper-parallax="-400">
+                                        <h2 class="card__title">
+                                            <a href="@Url.Action("HospitalityCulinary","Home")">Hospitality & Culinary</a>
+                                        </h2>
+                                        <p class="card__list">
+                                            This program is for students who wish to pursue a management career in the Australian hospitality industry. It offers a comprehensive understanding of what goes into being a successful manager. Everything from understanding the operations of a kitchen to the financial aspect of this industry. All of these skills prepares our students to manage a successful team.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card__right" data-parallax="-500">
+                                <div class="card__image-ibg">
+                                    <picture><source srcset="img/faculty/06.webp" type="image/webp"><img data-src="img/faculty/06.jpg" alt="Image"></picture>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="certificate__slide swiper-slide">
+                    <div class=" card">
+                        <div class="card__row ">
+                            <div class="card__left card__left_blue">
+                                <div class="card__block">
+                                    <div class="card__content" data-swiper-parallax="-400">
+                                        <h2 class="card__title">
+                                            <a href="@Url.Action("LeadershipManagement","Home")"> Leadership & Management</a>
+                                        </h2>
+                                        <p class="card__list">
+                                            Students enrolled in this course will learn about human resources, management , project management, business operations, finance, worker health and safety, and sustainability. This course provides students with the skills to plan and manage projects in the business world. The focus is on information technology and how it relates to various business projects.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card__right" data-parallax="-500">
+                                <div class="card__image-ibg">
+                                    <picture><source srcset="img/faculty/07.webp" type="image/webp"><img data-src="img/faculty/07.jpg" alt="Image"></picture>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="certificate__slide swiper-slide">
+                    <div class=" card">
+                        <div class="card__row card__row_reverse ">
+                            <div class="card__left card__left_green">
+                                <div class="card__block">
+                                    <div class="card__content" data-swiper-parallax="-400">
+                                        <h2 class="card__title">
+                                            <a href="@Url.Action("MarineHabitatConservationRestoration","Home")">Marine Habitat Conservation & Restoration</a>
+                                        </h2>
+                                        <p class="card__list">
+                                            It is because of the climate change and pollution that our ocean’s are undergoing significant changes. This Marine course offers a comprehensive background and understanding, of these issues. Upon graduating, our students are equipped with the most current conservations and restoration methods for marine life. Marine habitat conservation and restoration projects are increasing at a fast rate. Consequently, there is an increasing demand for people in this field. If you have an interest in this field we can offer the most up to date courses and technical knowledge, which will ensure your success in your chosen field.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card__right" data-parallax="-500">
+                                <div class="card__image-ibg">
+                                    <picture><source srcset="img/faculty/09.webp" type="image/webp"><img data-src="img/faculty/09.jpg" alt="Image"></picture>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="certificate__slide swiper-slide">
+                    <div class=" card">
+                        <div class="card__row">
+                            <div class="card__left card__left_red">
+                                <div class="card__block">
+                                    <div class="card__content" data-swiper-parallax="-400">
+                                        <h2 class="card__title">
+                                            <a href="@Url.Action("MarketingCommunications","Home")">Marketing & Communications</a>
+                                        </h2>
+                                        <p class="card__list">
+                                            These courses offer students the opportunity to learn about various marketing strategies. Students will participate in projects that teach various advertising, integrated marketing, and communications techniques. Once the students complete the prescribed curriculum, they will have a competitive advantage in today’s fast-paced world of business.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card__right" data-parallax="-500">
+                                <div class="card__image-ibg">
+                                    <picture><source srcset="img/faculty/10.webp" type="image/webp"><img data-src="img/faculty/10.jpg" alt="Image"></picture>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="certificate__pagination pagination"></div>
+        </div>
+    </div>
+</section>
+<div class="study padding">
+    <div class="study__container">
+        <div class="study__wrapper">
+            <div class="study__left">
+                <div class="study__gallery">
+                    <div class="study__row">
+                        <div class="study__image1-ibg">
+                            <picture><source srcset="img/study/01.webp" type="image/webp"><img data-src="img/study/01.jpg" alt="Image"></picture>
+                        </div>
+                        <div class="study__image2-ibg">
+                            <picture><source srcset="img/study/02.webp" type="image/webp"><img data-src="img/study/02.jpg" alt="Image"></picture>
+                        </div>
+                    </div>
+                    <div class="study__row">
+                        <div class="study__image3-ibg">
+                            <picture><source srcset="img/study/03.webp" type="image/webp"><img data-src="img/study/03.jpg" alt="Image"></picture>
+                        </div>
+                        <div class="study__image4-ibg">
+                            <picture><source srcset="img/study/04.webp" type="image/webp"><img data-src="img/study/04.jpg" alt="Image"></picture>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="study__content">
+                <div class="study__head head">
+                    <div class="head__top">
+                        ABOUT US
+                    </div>
+                    <div class="head__title">
+                        STUDY ID
+                    </div>
+                </div>
+                <div class="study__text">
+                    <p>
+                        We are an agency that supports both domestic and international students, which are
+                        interested in studying in Australia.
+                    </p>
+                    <p>
+                        We support you in every possible way. Including visa applications, travel and health
+                        insurance, and through out the rest of your journey as a student.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="service padding">
+    <div class="service__container">
+        <h2 class="title service__title">
+            STUDYID education services
+        </h2>
+        <div class="service__subtitle">
+            Welcome to STUDYID! Here is what we can do for you
+        </div>
+        <div class="service__slider swiper">
+            <div class="service__wrapper swiper-wrapper">
+                <div class="service__item swiper-slide item-service">
+                    <div class="item-service__number">1</div>
+
+                    <div class="item-service__title">Training Organization Selection</div>
+                    <div class="item-service__descr">
+                        We work with the best training <br>
+                        institutions.
+                    </div>
+                    <a href="@Url.Action("View","Blog", new {route="training-organization-choice"})" aria-label="Training Organization Selection" class="item-service__link">
+                        Read more
+                        <svg class="item-service__icon">
+                            <use href="img/icons/icons.svg#arrow"></use>
+                        </svg>
+                    </a>
+                </div>
+                <div class="service__item swiper-slide item-service">
+                    <div class="item-service__number">2</div>
+
+                    <div class="item-service__title">Student Visa Assistance (Subclass 500)</div>
+                    <div class="item-service__descr">
+                        We will support you in every step of your visa
+                        process
+                    </div>
+                    <a href="@Url.Action("View","Blog", new {route="student-visa-assistance"})" aria-label="Student Visa Assistance (Subclass 500)" class="item-service__link">
+                        Read more
+                        <svg class="item-service__icon">
+                            <use href="img/icons/icons.svg#arrow"></use>
+                        </svg>
+                    </a>
+                </div>
+                <div class="service__item swiper-slide item-service">
+                    <div class="item-service__number">3</div>
+
+                    <div class="item-service__title">
+                        Covid-19 <br>
+                        information
+                    </div>
+                    <div class="item-service__descr">
+                        We are up-to-date with everything related to
+                        the global pandemic
+                    </div>
+                    <a href="@Url.Action("View","Blog", new {route="covid19-measurements-and-rules"})"  aria-label="Covid-19 information" class="item-service__link">
+                        Read more
+                        <svg class="item-service__icon">
+                            <use href="img/icons/icons.svg#arrow"></use>
+                        </svg>
+                    </a>
+                </div>
+                <div class="service__item swiper-slide item-service">
+                    <div class="item-service__number">4</div>
+
+                    <div class="item-service__title">
+                        Overseas <br>
+                        Internship
+                    </div>
+                    <div class="item-service__descr">
+                        We will help you to find opportunities of
+                        internship
+                    </div>
+                    <a href="@Url.Action("View","Blog", new {route="overseas-internship"})" aria-label="Overseas Internship" class="item-service__link">
+                        Read more
+                        <svg class="item-service__icon">
+                            <use href="img/icons/icons.svg#arrow"></use>
+                        </svg>
+                    </a>
+                </div>
+                <div class="service__item swiper-slide item-service">
+                    <div class="item-service__number">5</div>
+
+                    <div class="item-service__title">
+                        Travel/Health <br>
+                        Insurance
+                    </div>
+                    <div class="item-service__descr">
+
+                        We will assist you with the best providers
+                    </div>
+                    <a href="@Url.Action("View","Blog", new {route="travel-health-insurance"})" aria-label="Travel/Health Insurance" class="item-service__link">
+                        Read more
+                        <svg class="item-service__icon">
+                            <use href="img/icons/icons.svg#arrow"></use>
+                        </svg>
+                    </a>
+                </div>
+                <div class="service__item swiper-slide item-service">
+                    <div class="item-service__number">6</div>
+
+                    <div class="item-service__title">
+                        Accommodation
+                        Assistance
+                    </div>
+                    <div class="item-service__descr">
+                        We can provide registered travel agents to
+                        coordinate your plans
+                    </div>
+                    <a href="@Url.Action("View","Blog", new {route="accommodation-assistance"})" aria-label="Accommodation Assistance" class="item-service__link">
+                        Read more
+                        <svg class="item-service__icon">
+                            <use href="img/icons/icons.svg#arrow"></use>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="service__pagination pagination"></div>
+        </div>
+    </div>
+</section>
+<section class="advisors padding">
+    <div class="advisors__container">
+        <div class="advisors__row">
+            <div class="advisors__content">
+                <div class="advisors__head head">
+                    <div class="head__top">
+                        PROFESSIONAL ADVISORS
+                    </div>
+                    <h2 class="head__title ">
+                        Consultations for prospective students
+                    </h2>
+                </div>
+                <div class="advisors__text">
+                    We will guide you to select the best courses which will compliment your interest and
+                    enhance your career. We will assist you in selecting the best programs which will further
+                    your education and remain within your budget. We will maintain a relationship through out
+                    your journey as a student, assisting you with any visa applications and career objectives.
+                </div>
+            </div>
+            <div class="advisors__column">
+                <div class="advisors__image-ibg">
+                    <div class="advisors__info-text">
+                        Our agency partners with several registered migration organisations. That can assist
+                        you in your future endeavours in Australia.
+                    </div>
+                    <picture><source srcset="img/advisors/01.webp" type="image/webp"><img data-src="img/advisors/01.png" alt="Image"></picture>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="events padding">
+    <div class=" events__container">
+        <h2 class="title events__title">
+            Latest News & Events
+        </h2>
+        <div class="events__subtitle">What our School has been up to</div>
+        <div class="events__slider swiper">
+            <div class="events__wrapper swiper-wrapper">
+                @foreach (var even in Model.TopArticles)
+                {
+                    <div class="events__item swiper-slide item-events">
+                        <div class="item-events__wrap">
+                            <span class="item-events__decor"></span>
+                            <a href="@Url.Action("View","Blog",new {route=even.Route})" class="item-events__image-ibg" aria-label="@even.Title">
+                                <picture><source srcset="@Url.Content(even.Image)" type="image/webp"><img data-src="@Url.Content(even.Image)" alt="Image"></picture>
+                            </a>
+                            <div class="item-events__content">
+                                <div class="item-events__date">
+                                    @Html.Raw(!string.IsNullOrEmpty(even.PublishOn) ? even.PublishOn : even.Created)
+                                </div>
+                                <a href="@Url.Action("View","Blog",new {route=even.Route})" class="item-events__title" aria-label="@even.Title">
+                                    @Html.Raw(even.Title)
+                                </a>
+                                <a href="@Url.Action("View","Blog",new {route=even.Route})" class="item-events__link" aria-label="@even.Title">
+                                    Read more
+                                    <svg class="item-events__icon">
+                                        <use href="@Url.Content("/img/icons/icons.svg#arrow")"></use>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
+            </div>
+        </div>
+    </div>
+</section>
+<div class="reviews padding">
+    <div class="reviews__container">
+        <div class="reviews__block">
+            <div class="reviews__slider swiper">
+                <div class="reviews__wrapper swiper-wrapper">
+                    <div class="reviews__slide slide-reviews swiper-slide">
+                        <div class="slide-reviews__image-ibg">
+                            <picture><source srcset="@Url.Content("/img/reviews/romy.webp")" type="image/webp"><img data-src="@Url.Content("/img/reviews/romy.webp")" alt="Image"></picture>
+                        </div>
+                        <div class="slide-reviews__name">
+                            Sunita Romy Gerstner
+                        </div>
+                        <div class="slide-reviews__date-of-study">
+                            Ex student - graduated 2021
+                        </div>
+                        <div class="slide-reviews__text">
+                            I am incredibly grateful to Study-ID for taking care of my Visa. I felt safe and in good, professional hands. It helped me al lot to have my head free and concentrate on school. 
+                        </div>
+
+                    </div>
+                  @*  <div class="reviews__slide slide-reviews swiper-slide">
+                        <div class="slide-reviews__image-ibg">
+                            <picture><source srcset="@Url.Content("/img/reviews/lucas.webp")" type="image/webp"><img data-src="@Url.Content("/img/reviews/lucas.webp")" alt="Image"></picture>
+                        </div>
+                        <div class="slide-reviews__name">
+                            Lucas Catel (Australia)
+                        </div>
+                        <div class="slide-reviews__date-of-study">
+                            Ex student - graduated 2017
+                        </div>
+                        <div class="slide-reviews__text">
+                            Project Management is a very rewarding course in the sense that I learned a lot and it was very practical knowledge and the trainer was very excellent.
+                        </div>
+
+                    </div>*@
+                    @*
+                        <div class="reviews__slide slide-reviews swiper-slide">
+                        <div class="slide-reviews__image-ibg">
+                        <picture><source srcset="img/reviews/01.webp" type="image/webp"><img data-src="img/reviews/01.png" alt="Image"></picture>
+                        </div>
+                        <div class="slide-reviews__name">
+                        MANDY SAVIN
+                        </div>
+                        <div class="slide-reviews__date-of-study">
+                        Ex student - graduated 2019
+                        </div>
+                        <div class="slide-reviews__text">
+                        Envirotech gave me a broader education and range of experiences. I was free to be
+                        myself. I have very fond memories of the school and am still in touch with the good
+                        friends I made there."
+                        </div>
+                        </div>*@
+                </div>
+                <div class="reviews__pagination pagination"></div>
+            </div>
+        </div>
+    </div>
+</div>
+@section MicroData{
+    <script type="application/ld+json">
+      {
+        "@Html.Raw("@context")": "https://schema.org/",
+        "@Html.Raw("@type")": "Review",
+        "itemReviewed": {
+          "@Html.Raw("@type")": "Organization",
+          "image": "https://study-id.com/img/elements/logo.webp",
+          "name": "StudyId",
+          "telephone": "+61(0)756606516",
+          "email":"",
+          "location": {
+             "@Html.Raw("@type")": "Place",
+                "address": {
+                    "@Html.Raw("@type")": "PostalAddress",
+                        "addressLocality": "Gold Coast, Australia",
+                        "addressRegion": "Queensland",
+                         "postalCode": "4220",
+                         "streetAddress": "62-66 Goodwin Terrace"
+                }
+            }
+        },
+        "reviewRating": {
+          "@Html.Raw("@type")": "Rating",
+          "ratingValue": "5"
+        },
+        "name": "I am incredibly grateful to Study-ID for taking care of my Visa.",
+        "author": {
+          "@Html.Raw("@type")": "Person",
+          "name": "Sunita Romy Gerstner"
+        },
+        "reviewBody": "I am incredibly grateful to Study-ID for taking care of my Visa. I felt safe and in good, professional hands. It helped me al lot to have my head free and concentrate on school. ",
+        "publisher": {
+          "@Html.Raw("@type")": "Organization",
+          "name": "StudyId"
+        }
+      }
+</script>
+}
+

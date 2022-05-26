@@ -1,0 +1,229 @@
+﻿@{
+    ViewData["Title"] = "StudyId - This section provides the information about main requirements for Australian student visa. One can easily find there all answers for the most important questions. ";
+    ViewData["Description"] = "You can find there all the answers to the most important questions related to education, travel insurance, and entry requirements for studying in Australia as well as the rules of the admission process. Get an individual consultation.";
+    ViewData["Canonical"] = Url.Action("Faq", "Home");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="faq">
+    <div class="faq__container">
+        <div class="faq__breadcrumb breadcrumb">
+            <ul class="breadcrumb__list">
+                <li class="breadcrumb__item">
+                    <a href="" class="breadcrumb__link">Home </a>
+                </li>
+                <li class="breadcrumb__item">
+                    <span class="breadcrumb__current">
+                        FAQ
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <div class="faq__top-head top-head">
+            <a href="" class="top-head__exit">
+                <img src="img/elements/arrow-left.svg" alt="Icon" class="top-head__icon">
+            </a>
+            <h1 class="title faq__title">
+                Alright, let´s talk!
+            </h1>
+        </div>
+        <ul data-spollers class="spollers faq__spollers">
+            <li class="spollers__item">
+                <button type="button" data-spoller class="spollers__title">
+                    Will I get personalized
+                    advice?
+                </button>
+                <div class="spollers__body">
+                    Yes, you will! It does not matter if you are currently in Australia or were here in the past.
+                    We will advise you on the best courses to take, and answer any other questions regarding your stay in Australia.
+                </div>
+            </li>
+            <li class="spollers__item">
+                <button type="button" data-spoller class="spollers__title">
+                    How do I enrol in a
+                    course?
+                </button>
+                <div class="spollers__body">
+                    We will help you with that. We will provide you with a step by step process
+                    as to how to enrol in a course and what is required for a successful application.
+                </div>
+            </li>
+            <li class="spollers__item">
+                <button type="button" data-spoller class="spollers__title">
+                    What are the requirements to enrol
+                    in a course here in Australia?
+                </button>
+                <div class="spollers__body">
+                    You will need a valid passport which does not expire for at least six months.
+                    Depending on the courses you choose, you will require the appropriate proficiency in English language.
+                    You may also be required to provide appropriate verification of your previous academic career. We will, of course, guide you through
+                    all of this.
+                </div>
+            </li>
+            <li class="spollers__item">
+                <button type="button" data-spoller class="spollers__title">
+                    What documents are necessary to
+                    get a student visa for Australia?
+                </button>
+                <div class="spollers__body">
+                    You need a valid passport, and a letter confirming your enrolment. You will also be required to state,
+                    in writing, your desire to study in Australia.
+                </div>
+            </li>
+            <li class="spollers__item">
+                <button type="button" data-spoller class="spollers__title">
+                    How much does the student visa
+                    cost?
+                </button>
+                <div class="spollers__body">
+                    The student visa for Australia is $650 AUD. This amount includes Study ID fees.
+                </div>
+            </li>
+            <li class="spollers__item">
+                <button type="button" data-spoller class="spollers__title">
+                    Can study id assist me with
+                    getting health insurance?
+                </button>
+                <div class="spollers__body">
+                    Yes! Health insurance is mandatory for students in Australia.
+                    To this end, we will suggest the best course of action for you.
+                </div>
+            </li>
+            <li class="spollers__item">
+                <button type="button" data-spoller class="spollers__title">
+                    Can study id help me find travel
+                    insurance?
+                </button>
+                <div class="spollers__body">
+                    Yes! We will suggest the best option for you. In addition to this, we can also assist you with your flight arrangements.
+                </div>
+            </li>
+            <li class="spollers__item">
+                <button type="button" data-spoller class="spollers__title">
+                    Can you help me find the best
+                    possible accommodations?
+                </button>
+                <div class="spollers__body">
+                    Yes! We will offer you different options, from which you can choose the one you prefer.
+                    If for some reason you don't like where you are living, we will help you find other accommodations.
+                </div>
+            </li>
+            <li class="spollers__item">
+                <button type="button" data-spoller class="spollers__title">
+                    Will you provide transportation
+                    from the airport?
+                </button>
+                <div class="spollers__body">
+                    Yes, we will ensure you get safely to your destination once you arrive.
+                </div>
+            </li>
+            <li class="spollers__item">
+                <button type="button" data-spoller class="spollers__title">
+                    Will you help me find suitable
+                    accommodations if I am quarantined?
+                </button>
+                <div class="spollers__body">
+                    Yes, we will support you in finding suitable accommodation if this is needed.
+                </div>
+            </li>
+            <li class="spollers__item">
+                <button type="button" data-spoller class="spollers__title">
+                    Can you help me find suitable
+                    transportation within Australia?
+                </button>
+                <div class="spollers__body">
+                    Yes, We will help you find the best way to get around once you arrive.
+                </div>
+            </li>
+            <li class="spollers__item">
+                <button type="button" data-spoller class="spollers__title">
+                    Will you help me find a job in
+                    Australia?
+                </button>
+                <div class="spollers__body">
+                    We will utilize our extensive knowledge of the current job market and our connections, to find a job that you will enjoy.
+                </div>
+            </li>
+            <li class="spollers__item">
+                <button type="button" data-spoller class="spollers__title">
+                    If I choose to continue my
+                    studies in Australia, will you help with that?
+                </button>
+                <div class="spollers__body">
+                    Yes, we will assist you every step of the way to ensure that you are enrolled in the right program.
+                </div>
+            </li>
+        </ul>
+        <div class="faq__form-wrap">
+             <form class="about__form form" id="contact-form">
+                <div class="alert alert-danger" v-if="error!=null && error!=''">{{error}}</div>
+                <div class="form__title">
+                    Request Your Free Online Assessment
+                </div>
+                <br />
+                <div class="form__items">
+                    <div class="form__item">
+                        <input type="text" name="firstname" data-error="Error" placeholder="First name*" class="input form__input" v-bind:disabled="loader" v-model="$v.firstName.$model" v-bind:class="{'error':$v.firstName.$error }" v-bind:disabled="loader" />
+                        <div class="error form__error" v-if="$v.firstName.$error && !$v.firstName.required">
+                            This field is required
+                        </div>
+                    </div>
+                    <div class="form__item">
+                        <input type="text" name="lastname" data-error="Error" placeholder="Last name*" class="input form__input" v-bind:disabled="loader" v-model="$v.lastName.$model" v-bind:class="{'error':$v.lastName.$error }" v-bind:disabled="loader" />
+                        <div class="error form__error" v-if="$v.lastName.$error && !$v.lastName.required">
+                            This field is required
+                        </div>
+                    </div>
+                    <div class="form__item">
+                        <input type="text" name="Email" data-error="Error" placeholder="Email*" class="input form__input" v-bind:disabled="loader" v-model="$v.email.$model" v-bind:class="{'error':$v.email.$error }" v-bind:disabled="loader" />
+                        <div class="error form__error" v-if="$v.email.$error && !$v.email.required">
+                            This field is required
+                        </div>
+                        <div class="error form__error" v-if="$v.email.$error && !$v.email.email">
+                            Wrong email format
+                        </div>
+                    </div>
+                    <div class="form__item">
+                        <v-select :options="courses" placeholder="Course of Interest" class="form__input" v-bind:disabled="loader" label="title" :reduce="item => item.id" v-model="course"></v-select>
+                    </div>
+                    <div class="form__item">
+                        <div class="form__radiobuttons">
+                            <div class="form__radiobuttons-title">
+                                Are you currently in Australia?
+                            </div>
+                            <div class="form__radiobuttons-items">
+                                <div class="checkbox form__chechbox">
+                                    <input id="c_1" data-error="Error" checked class="checkbox__input" type="radio" v-bind:disabled="loader" v-bind:value="true" name="australianResident" v-model="australianResident">
+                                    <label for="c_1" class="checkbox__label">
+                                        <span class="checkbox__text">Yes</span>
+                                    </label>
+                                </div>
+                                <div class="checkbox form__chechbox">
+                                    <input id="c_12" data-error="Error" class="checkbox__input" type="radio" v-bind:disabled="loader" v-bind:value="false" name="australianResident" v-model="australianResident">
+                                    <label for="c_12" class="checkbox__label">
+                                        <span class="checkbox__text">No</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form__item">
+                        <date-picker v-model="startDate" format="DD/MM/YYYY"
+                                     :disabled-date="disableBeforeToday"
+                                     type="date"
+                                     v-bind:disabled="loader"
+                                     placeholder="When would you like to start? *" input-class="input form__input"></date-picker>
+                    </div>
+                    <div class="alert alert-success" v-if="success">You Application has been submitted successfully. Our team will contact you soon. </div>
+                    <a class="button form__button" style="cursor: pointer" v-bind:disabled="loader" v-on:click="submit();" v-if="id==null">
+                        <div class="spinner-border spinner-border-sm text-white" role="status" v-if="loader">
+                        </div>
+                        <i class="fa-solid fa-floppy-disk" v-if="!loader"></i> Submit
+                    </a>
+                </div>
+                <br />
+            </form>
+        </div>
+    </div>
+</section>
+
+

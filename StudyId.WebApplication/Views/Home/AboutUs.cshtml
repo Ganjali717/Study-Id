@@ -1,0 +1,193 @@
+﻿@{
+    ViewData["Title"] = "StudyId - We will help you to apply for Australian student visa form which allows to get Australian ID";
+    ViewData["Description"] = "We offer a range of services that will make your student life successful and enjoyable. Welcome to Study ID!";
+    ViewData["Canonical"] = Url.Action("AboutUs", "Home");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="about">
+    <div class="about__container">
+        <div class="about__breadcrumb breadcrumb">
+            <ul class="breadcrumb__list">
+                <li class="breadcrumb__item">
+                    <a href="" class="breadcrumb__link">Home </a>
+                </li>
+                <li class="breadcrumb__item">
+                    <span class="breadcrumb__current">
+                        About Us
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <div class="about__top-head top-head">
+            <a href="" class="top-head__exit">
+                <img src="@Url.Content("~/img/elements/arrow-left.svg")" alt="Icon" class="top-head__icon">
+            </a>
+            <h1 class="title about__title">
+                About Us
+            </h1>
+        </div>
+        <div class="about__row">
+            <div class="about__left">
+                <div class="about__content">
+                    <div class="about__title2">We help you to achieve dreams</div>
+                    <div class="about__text">
+                        We are an educational agency that facilitates study in Australia for both foreign and
+                        domestic students. We support you through out your journey. This includes things like
+                        your student visa, accommodations, travel insurance, and selecting the optimal courses
+                        during this journey. We offer a range of services that will make your life as a student
+                        both successful and enjoyable. Welcome to study id!
+                    </div>
+                    <div class="about__ps">
+                        Give us a call or write to us to schedule a meeting. We can´t wait to meet you!
+                    </div>
+                </div>
+            </div>
+            <div class="about__right">
+                <div class="about__image-ibg">
+                    <picture><source srcset="@Url.Content("~/img/about/01.webp")" type="image/webp"><img data-src="@Url.Content("~/img/about/01.jpg")" alt="Image"></picture>
+                </div>
+            </div>
+        </div>
+        <div class="about__study study-about" id="why-study-in-australia">
+            <div class="study-about__row">
+                <div class="study-about__images">
+                    <div class="study-about__image1-ibg">
+                        <picture><source srcset="@Url.Content("~/img/about/02.webp")" type="image/webp"><img data-src="@Url.Content("~/img/about/02.png")" alt="Image"></picture>
+                    </div>
+                    <div class="study-about__image2-ibg">
+                        <picture><source srcset="@Url.Content("~/img/about/03.webp")" type="image/webp"><img data-src="@Url.Content("~/img/about/03.png")" alt="Image"></picture>
+                    </div>
+                </div>
+                <div class="study-about__content">
+                    <div class="study-about__title">
+                        Why Study in Australia
+                    </div>
+                    <div class="study-about__text">
+                        Australia is one of the most beautiful countries in the world. It is an industrialized
+                        and developed nation with tremendous business and growth opportunities. This coupled
+                        with the fact that it has some of the most beautiful tourist destinations, makes it a
+                        very appealing place to live and work. Having the opportunity to come to Australia is a
+                        dream come true, which we can make possible for you.
+                    </div>
+                </div>
+            </div>
+            <div class="study-about__row2">
+                <div class="study-about__text2">
+                    It is the largest country in Oceania, and is boasts some of
+                    the most comfortable and liveable place on earth. Melbourne, for example is consistently
+                    rated in the top three liveable cities in the world. Australia’s population is 26 million
+                    people which is concentrated on the eastern seaboard. It’s capital is Canberra with its
+                    largest city being Sydney. Australia’s beaches are magnificent, and alone are worth coming
+                    to visit. The people are warm and welcoming, and respect people from different cultures.
+                    It is a paradise!
+                </div>
+                <div class="study-about__images2">
+                    <div class="study-about__image3-ibg">
+                        <picture><source srcset="@Url.Content("~/img/about/04.webp")" type="image/webp"><img data-src="@Url.Content("~/img/about/04.png")" alt="Image"></picture>
+                    </div>
+                    <div class="study-about__image4-ibg">
+                        <picture><source srcset="@Url.Content("~/img/about/05.webp")" type="image/webp"><img data-src="@Url.Content("~/img/about/05.png")" alt="Image"></picture>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="about__online">
+            <form class="about__form form" id="contact-form">
+                <div class="alert alert-danger" v-if="error!=null && error!=''">{{error}}</div>
+                <div class="form__title">
+                    Request Your Free Online Assessment
+                </div>
+                <br />
+                <div class="form__items">
+                    <div class="form__item">
+                        <input type="text" name="firstname" data-error="Error" placeholder="First name*" class="input form__input" v-bind:disabled="loader" v-model="$v.firstName.$model" v-bind:class="{'error':$v.firstName.$error }" v-bind:disabled="loader" />
+                        <div class="error form__error" v-if="$v.firstName.$error && !$v.firstName.required">
+                            This field is required
+                        </div>
+                    </div>
+                    <div class="form__item">
+                        <input type="text" name="lastname" data-error="Error" placeholder="Last name*" class="input form__input" v-bind:disabled="loader" v-model="$v.lastName.$model" v-bind:class="{'error':$v.lastName.$error }" v-bind:disabled="loader" />
+                        <div class="error form__error" v-if="$v.lastName.$error && !$v.lastName.required">
+                            This field is required
+                        </div>
+                    </div>
+                    <div class="form__item">
+                        <input type="text" name="Email" data-error="Error" placeholder="Email*" class="input form__input" v-bind:disabled="loader" v-model="$v.email.$model" v-bind:class="{'error':$v.email.$error }" v-bind:disabled="loader" />
+                        <div class="error form__error" v-if="$v.email.$error && !$v.email.required">
+                            This field is required
+                        </div>
+                        <div class="error form__error" v-if="$v.email.$error && !$v.email.email">
+                            Wrong email format
+                        </div>
+                    </div>
+                    <div class="form__item">
+                        <v-select :options="courses" placeholder="Course of Interest" class="form__input" v-bind:disabled="loader" label="title" :reduce="item => item.id" v-model="course"></v-select>
+                    </div>
+                    <div class="form__item">
+                        <div class="form__radiobuttons">
+                            <div class="form__radiobuttons-title">
+                                Are you currently in Australia?
+                            </div>
+                            <div class="form__radiobuttons-items">
+                                <div class="checkbox form__chechbox">
+                                    <input id="c_1" data-error="Error" checked class="checkbox__input" type="radio" v-bind:disabled="loader" v-bind:value="true" name="australianResident" v-model="australianResident">
+                                    <label for="c_1" class="checkbox__label">
+                                        <span class="checkbox__text">Yes</span>
+                                    </label>
+                                </div>
+                                <div class="checkbox form__chechbox">
+                                    <input id="c_12" data-error="Error" class="checkbox__input" type="radio" v-bind:disabled="loader" v-bind:value="false" name="australianResident" v-model="australianResident">
+                                    <label for="c_12" class="checkbox__label">
+                                        <span class="checkbox__text">No</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form__item">
+                        <date-picker v-model="startDate" format="DD/MM/YYYY"
+                                     :disabled-date="disableBeforeToday"
+                                     type="date"
+                                     v-bind:disabled="loader"
+                                     placeholder="When would you like to start? *" input-class="input form__input"></date-picker>
+                    </div>
+                    <div class="alert alert-success" v-if="success">You Application has been submitted successfully. Our team will contact you soon. </div>
+                    <a class="button form__button" style="cursor: pointer" v-bind:disabled="loader" v-on:click="submit();" v-if="id==null">
+                        <div class="spinner-border spinner-border-sm text-white" role="status" v-if="loader">
+                        </div>
+                        <i class="fa-solid fa-floppy-disk" v-if="!loader"></i> Submit
+                    </a>
+                </div>
+                <br />
+            </form>
+        </div>
+        <div class="about__bottom bottom-about" id="covid-19-statement">
+            <div class="bottom-about__row">
+                <div class="bottom-about__content">
+                    <div class="bottom-about__title">
+                        Covid-19 Statement
+                    </div>
+                    <div class="bottom-about__text">
+                        <p>
+                            Since January 2020 Australian Government tried its best to provide the highest level of protection for locals. 
+                            To reach this, Australian borders were closed for all foreign tourists and visitors from all over the world who had no residence permits.
+                            As the pandemic goes on in a less complex scenario in 2022, Australia eased entry restrictions in February 2022. 
+                            Since that date, all the visitors coming to Australia can stay in the country without any restriction. 
+                            There are two main rules you should adhere to when planning your visit to Australia:
+                            <ul>
+                                <li>The visitor should have a valid Australian visa.</li>
+                                <li>The visitor should have a valid vaccination certificate proving that the person is fully vaccinated against Covid-19 including a booster vaccine dose.</li>
+                            </ul>
+                        </p>
+                        <p>
+                            You are welcome to start your education in Australia in case you meet these requirements. Stay safe and take care of yourself.
+                        </p>
+                    </div>
+                </div>
+                <div data-da=".bottom-about__content,991,1" class="bottom-about__image-ibg">
+                    <picture><source srcset="@Url.Content("~/img/about/06.webp")" type="image/webp"><img data-src="@Url.Content("~/img/about/06.png")" alt="About Image"></picture>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

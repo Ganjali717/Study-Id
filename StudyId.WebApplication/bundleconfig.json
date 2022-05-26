@@ -1,0 +1,85 @@
+[
+  {
+    "outputFileName": "wwwroot/css/all.min.css",
+    "inputFiles": [
+      "wwwroot/css/style.css",
+      "wwwroot/lib/vue/css/vue-select.css",
+      "wwwroot/lib/vue/css/vue2-datepicker.min.css"
+    ],
+    "minify": {
+      "enabled": false,
+      "renameLocals": false
+    }
+  },
+  {
+    "outputFileName": "wwwroot/css/all.inside.min.css",
+    "inputFiles": [
+      "wwwroot/lib/bootstrap/dist/css/bootstrap.css",
+      "wwwroot/css/style.css",
+      "wwwroot/lib/vue/css/vue2Dropzone.min.css",
+
+      "wwwroot/lib/vue/css/voerro-vue-tagsinput.css",
+      "wwwroot/lib/vue/css/vueCropper.css",
+      "wwwroot/lib/vue/css/vue2-datepicker.min.css",
+      "wwwroot/lib/vue/css/vue-select.css"
+
+    ],
+    "minify": {
+      "enabled": false,
+      "renameLocals": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/all.min.js",
+    "inputFiles": [
+      "wwwroot/js/app.js",
+      "wwwroot/lib/vue/prod/vue.min.js",
+      "wwwroot/lib/vue/vuelidate.min.js",
+      "wwwroot/lib/vue/validators.min.js",
+      "wwwroot/lib/vue/axios.min.js",
+      "wwwroot/lib/vue/vue-select.js",
+      "wwwroot/lib/vue/vue2-datepicker.min.js",
+      "wwwroot/js/controllers/public/vue-public-form.js"
+
+    ],
+    "minify": {
+      "enabled": false,
+      "renameLocals": false
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/boostrap.bundle.js",
+    "inputFiles": [
+      "wwwroot/lib/jquery/dist/jquery-3.6.0.min.js",
+      "wwwroot/lib/bootstrap/dist/js/popper.min.js",
+      "wwwroot/lib/bootstrap/dist/js/bootstrap.min.js",
+      "wwwroot/js/inside.app.js"
+
+    ],
+    "minify": {
+      "enabled": false,
+      "renameLocals": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/vue.bundle.js",
+    "inputFiles": [
+      "wwwroot/lib/vue/vue.global.js",
+      "wwwroot/lib/vue/vuelidate.min.js",
+      "wwwroot/lib/vue/validators.min.js",
+      "wwwroot/lib/vue/axios.min.js",
+      "wwwroot/lib/vue/vue2Dropzone.min.js",
+      "wwwroot/lib/vue/vue2-datepicker.min.js",
+      "wwwroot/lib/vue/voerro-vue-tagsinput.js",
+      "wwwroot/lib/vue/vue-select.js",
+      "wwwroot/lib/vue/moment.js",
+      "wwwroot/lib/vue/vue2-editor.umd.min.js",
+      "wwwroot/lib/vue/vueCropper.min.js",
+      "wwwroot/lib/vue/lodash.min.js"
+    ],
+    "minify": {
+      "enabled": false,
+      "renameLocals": true
+    }
+  }
+]

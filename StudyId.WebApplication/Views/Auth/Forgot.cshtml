@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Fogot password";
+    Layout = "~/Views/Shared/_InsideLayout.cshtml";
+}
+@section Scripts
+{
+<script src="/js/controllers/auth/vue-auth-forgot.js" type="module"></script>
+}
+<div id="forgot-app" class="contact__row2" style="margin-top:10%">
+    <div class="contact__form-wrap">
+        <div class="form__title">
+            Fogot password form
+        </div>
+        <div class="form__subtitle">
+            Please, input your email.
+        </div>
+        <div class="form__items">
+            <div class="form__item">
+                <input autocomplete="off" type="email" name="UserName" data-error="Error" placeholder="Email*" class="input form__input" v-model.trim="$v.username.$model" v-bind:disabled="loader">
+                <div class="error form__error" v-if="$v.username.$error && !$v.username.required">
+                    This field is required
+                </div>
+                <div class="error form__error" v-if="$v.username.$error && !$v.username.email">
+                    Wrong email format
+                </div>
+            </div>
+            <div class="alert alert-success" v-show="success">
+                Your request was successfully submitted, please follow the instructions that were sent by email.
+            </div>
+            <button class="button form__button" v-on:click="forgotPassword();">
+                <span class="spinner-border spinner-border-sm text-light m-1" v-if="loader"></span>
+                <span><i class="fa-solid fa-unlock-keyhole" v-if="!loader"></i> Reset password</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+

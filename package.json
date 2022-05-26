@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "@vuelidate/core": "^2.0.0-alpha.35",
+    "@vuelidate/validators": "^2.0.0-alpha.27",
+    "vue-sweetalert2": "^5.0.2",
+    "vue2-dropzone": "^3.6.0"
+  },
+  "devDependencies": {
+    "vue2-collapse": "^1.0.15"
+  }
+}

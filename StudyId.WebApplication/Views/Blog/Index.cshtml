@@ -1,0 +1,134 @@
+﻿    @using StudyId.Entities.Articles
+@model StudyId.Models.Dto.Blog.BlogSearchDto
+@{
+    ViewData["Title"] = "StudyId - We collect job offers where the candidates with Australian student work visa are considered";
+    ViewData["Description"] = "We are constantly monitor up-to-date information about the companies which consider the candidates to work with Australian student visa. Our team will help you to find a job and obtain a desired position after you have graduated from the Australian educational institution. ";
+    ViewData["Canonical"] = Url.Action("Index", "Blog", new {q=(string?)null, category=(string?)null, tag=(string?)null, page=(int?)null});
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="blog">
+    <div class="blog__container">
+        <div class="blog__breadcrumb breadcrumb">
+            <ul class="breadcrumb__list">
+                <li class="breadcrumb__item">
+                    <a href="@Url.Action("Index","Home")" class="breadcrumb__link">Home </a>
+                </li>
+                <li class="breadcrumb__item">
+                    <span class="breadcrumb__current">
+                        News and Events
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <div class="blog__top-head top-head">
+            <a href="" class="top-head__exit">
+                <img src="@Url.Content("/img/elements/arrow-left.svg")" alt="Icon" class="top-head__icon">
+            </a>
+            <h1 class="title blog__title">
+                Blog
+            </h1>
+        </div>
+        <div class="blog__row">
+            <div class="blog__content">
+                <div class="blog__items">
+                    @foreach (var item in Model.Items.Data)
+                    {
+                        <div class="blog__item item-blog">
+                            <a href="@Url.Action("View", new {route=item.Route})" class="item-blog__image-ibg">
+                                <picture><source srcset="@Url.Content(item.Image)" type="image/webp"><img alt="@Html.Raw(item.ImageTags)"></picture>
+                            </a>
+                            <div class="item-blog__content">
+                                <a href="@Url.Action("View", new {route=item.Route})" class="item-blog__title">@item.Title</a>
+                                <a href="@Url.Action("Index",new {category=item.CategoryRoute})" class="item-blog__descr" rel="nofollow">@item.Category</a>
+                                <div class="item-blog__text">
+                                    @Html.Raw(item.ShortDescription)
+                                </div>
+                                <div class="item-blog__row">
+                                    <div class="item-blog__info-flex">
+                                        <img src="@Url.Content("/img/blog/user.svg")" alt="User who published article" class="item-blog__icon">
+                                        <span class="item-blog__info-text">
+                                            Admin
+                                        </span>
+                                    </div>
+                                    <div class="item-blog__info-flex">
+                                        <img src="@Url.Content("/img/blog/date.svg")" alt="Published date" class="item-blog__icon">
+                                        <span class="item-blog__info-text">
+                                            @Html.Raw(!string.IsNullOrEmpty(item.PublishOn) ? item.PublishOn : item.Created)
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="blog__pagging pagging">
+                  @*  <a href="" class="pagging__arrow pagging__arrow_prev">
+                        <svg class="pagging__icon ">
+                            <use href="@Url.Content("/img/icons/icons.svg#arrow2")"></use>
+                        </svg>
+                    </a>*@
+                  <ul class="pagging__list">
+                      @foreach (var page in Model.Pages)
+                      {
+                          <li class="pagging__item">
+                              <a href="@Url.Action("Index", new {page=page})" class="pagging__link active">
+                                  @Html.Raw(page)
+                              </a>
+                          </li>
+                      }
+                   
+                  </ul>
+                 @*   <a href="" class="pagging__arrow pagging__arrow_next">
+                        <svg class="pagging__icon ">
+                            <use href="img/icons/icons.svg#arrow2"></use>
+                        </svg>
+                    </a>*@
+                </div>
+            </div>
+            <aside class="blog__aside aside-blog">
+                @using (Html.BeginForm("Index", "Blog", FormMethod.Get, new { @class = "aside-blog__form" }))
+                {
+                    <div class="aside-blog__item">
+                        @Html.TextBox("q", "", new {@class = "input aside-blog__input", placeholder = "Search"})
+                        <button class="aside-blog__button">
+                            <img src="@Url.Content("/img/blog/search.svg")" alt="Search icon">
+                        </button>
+                    </div>
+                }
+                <div class="aside-blog__blocks">
+                    <div class="aside-blog__block">
+                        <h3 class="aside-blog__title">
+                            Categories
+                        </h3>
+                        <div class="aside-blog__categories">
+                            <ul class="aside-blog__categories-list">
+                                @foreach (var category in Model.Categories)
+                                {
+                                    <li>
+                                        <a href="@Url.Action("Index",new {category=category.Route})" rel="nofollow" class="aside-blog__categories-link">
+                                            @category.Title
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="aside-blog__block">
+                        <h3 class="aside-blog__title">
+                            Tags
+                        </h3>
+                        <div class="aside-blog__tags">
+                            @foreach (var tag in Model.Tags)
+                            {
+                                <a href="@Url.Action("Index", new {tag=tag})" class="aside-blog__tag" rel="nofollow">
+                                    @Html.Raw(tag.ToLower())
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</section>

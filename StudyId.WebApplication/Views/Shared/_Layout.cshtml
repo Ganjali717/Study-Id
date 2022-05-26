@@ -1,0 +1,351 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>@ViewData["Title"]</title>
+    <meta name="description" content="@ViewData["Description"]">
+    <!-- <style>body{opacity: 0;}</style> -->
+    <link rel="shortcut icon" href="/favicon.ico">
+    <!-- <meta name="robots" content="noindex, nofollow"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="~/css/all.min.css" asp-append-version="true" />
+    @if (ViewData.ContainsKey("Canonical"))
+    {
+        <link rel="canonical" href="@ViewData["Canonical"]"/> 
+    }
+    @if (ViewData.ContainsKey("NoIndex"))
+    {
+        <meta name="robots" content="noindex">
+    }
+    @await RenderSectionAsync("MicroData", required: false)
+    <!-- Google Tag Manager -->
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-5BZ8KBZ');</script>
+    <!-- End Google Tag Manager -->
+</head>
+<body>
+    <div class="wrapper">
+        <main class="page">
+            <div class="page__row">
+                <aside class="sidebar">
+                    <div class="sidebar__wrapper">
+                        <div class="sidebar__close"></div>
+                        <div class="sidebar__top">
+                            <a href="@Url.Action("Index","Home")" class="sidebar__logo"><picture><source srcset="@Url.Content("~/img/elements/logo.webp")" type="image/webp"><img src="@Url.Content("~/img/elements/logo.png")" alt="StudyId Logo" width="100%" height="100%"></picture></a>
+                            <div class="sidebar__title">
+                                Welcome
+                            </div>
+                            <nav class="sidebar__menu menu">
+                                <ul class="menu__list">
+                                    <li class="menu__item">
+                                        <a href="@Url.Action("Qualifications","Home")" class="menu__link">
+                                            Qualifications
+                                        </a>
+                                    </li>
+                                    <li class="menu__item">
+                                        <a href="@Url.Action("AboutUs","Home")" class="menu__link">
+                                            About us
+                                        </a>
+                                    </li>
+                                    @* <li class="menu__item">
+                                        <a href="" class="menu__link">
+                                        Popular Location
+                                        </a>
+                                        </li>*@
+                                    <li class="menu__item">
+                                        <a href="@Url.Action("Index","Blog")" class="menu__link">
+                                            News & Events
+                                        </a>
+                                    </li>
+                                    <li class="menu__item">
+                                        <a href="@Url.Action("ContactUs","Home")" class="menu__link">
+                                            Contacts us
+                                        </a>
+                                    </li>
+                                    <li class="menu__item">
+                                        <a href="@Url.Action("Faq","Home")" class="menu__link">
+                                            FAQs
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                            <div class="sidebar__mobile mobile-sidebar">
+                                <a href="tel:+610756606516" class="mobile-sidebar__phone">+61(0)756606516</a>
+                                <a href="mailto:info@study-id.com" class="mobile-sidebar__mail">info@study-id.com</a>
+                                @*      <ul class="mobile-sidebar__list">
+                                    <li>
+                                    <a href="" class="mobile-sidebar__language active">En</a>
+                                    </li>
+                                    <li>
+                                    <a href="" class="mobile-sidebar__language ">Ua</a>
+                                    </li>
+                                    <li>
+                                    <a href="" class="mobile-sidebar__language ">De</a>
+                                    </li>
+                                    </ul>*@
+                                @*     <form action="#" class="mobile-sidebar__form">
+                                    <div class="mobile-sidebar__item-input">
+                                    <input autocomplete="off" type="text" name="form[]" data-error="Ошибка" placeholder="Search" class="input mobile-sidebar__input">
+                                    <button class="mobile-sidebar__button">
+                                    <img src="img/elements/search.svg" alt="Icon">
+                                    </button>
+                                    </div>
+                                    </form>*@
+                            </div>
+                        </div>
+                        @*<ul class="sidebar__socials socials">
+                            <li class="socials__item">
+                            <a href="" class="socials__link">
+                            <svg class="socials__icon">
+                            <use href="@Url.Content("~/img/icons/icons.svg#twitter")"></use>
+                            </svg>
+                            </a>
+                            </li>
+                            <li class="socials__item">
+                            <a href="" class="socials__link">
+                            <svg class="socials__icon">
+                            <use href="@Url.Content("~/img/icons/icons.svg#facebook")"></use>
+                            </svg>
+                            </a>
+                            </li>
+                            <li class="socials__item">
+                            <a href="" class="socials__link">
+                            <svg class="socials__icon">
+                            <use href="@Url.Content("~/img/icons/icons.svg#instagram")"></use>
+                            </svg>
+                            </a>
+                            </li>
+                            <li class="socials__item">
+                            <a href="" class="socials__link">
+                            <svg class="socials__icon">
+                            <use href="@Url.Content("~/img/icons/icons.svg#youtube")"></use>
+                            </svg>
+                            </a>
+                            </li>
+                            <li class="socials__item">
+                            <a href="" class="socials__link">
+                            <svg class="socials__icon">
+                            <use href="@Url.Content("~/img/icons/icons.svg#pinterest")"></use>
+                            </svg>
+                            </a>
+                            </li>
+                            <li class="socials__item">
+                            <a href="" class="socials__link">
+                            <svg class="socials__icon">
+                            <use href="@Url.Content("~/img/icons/icons.svg#linkedin")"></use>
+                            </svg>
+                            </a>
+                            </li>
+                            </ul>*@
+                    </div>
+                </aside>
+                <div class="page__content">
+                    <header class="header">
+                        <div class="header__container">
+                            <div class="header__row">
+                                <div class="header__text">
+                                    Welcome to StudyID-Est 2002
+                                </div>
+                                <div class="header__mobile">
+                                    <a href="#" class="header__logo">
+                                        <picture><source srcset="@Url.Content("~/img/elements/logo.webp")" type="image/webp"><img src="@Url.Content("~/img/elements/logo.png")" alt="Logo" width="100%" height="100%"></picture>
+                                    </a>
+                                    <button type="button" class="menu__icon icon-menu" aria-label="Open menu"><span></span></button>
+                                </div>
+                                <div class="header__actions">
+                                    <a href="mailto:info@study-id.com" class="header__mail">
+                                        info@study-id.com
+                                    </a>
+                                    <a href="tel:+610756606516" class="header__phone">+61(0)756606516</a>
+                                    @*  <div class="header__lang">
+                                        <select data-class-modif="lang" name="form[]" class="form">
+                                        <option value="1" selected>En</option>
+                                        <option data-asset="img/elements/flag01.png" data-href="#" value="2">Ua </option>
+                                        <option data-asset="img/elements/flag02.png" data-href="#" value="3">De</option>
+                                        </select>
+                                        </div>*@
+                                    @*     <form action="#" class="header__search search">
+                                        <input autocomplete="off" type="text" name="form[]" data-error="Ошибка" placeholder="Search" class="input search__input">
+                                        <button class="search__button">
+                                        <svg class="search__icon">
+                                        <use href="img/icons/icons.svg#search"></use>
+                                        </svg>
+                                        </button>
+                                        </form>*@
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+                    @RenderBody()
+                </div>
+            </div>
+        </main>
+        <footer class="footer">
+            <div class="footer__container">
+                @* <a href="" class="footer__chat">
+                    <img src="@Url.Content("~/img/elements/chat.svg")" alt="Chat" class="footer__icon">
+                    </a>*@
+                <div class="footer__row">
+                    <div class="footer__left">
+                        <div class="footer__info">
+                            <a href="@Url.Action("Index","Home")" class="footer__title-link">
+                                STUDY ID
+                            </a>
+                            <div class="footer__copy">
+                                Copyright (c) 2022,
+                                All rights reserved.
+                            </div>
+                        </div>
+                        <a href="@Url.Action("Index","Home")" class="footer__logo">
+                            <picture><source srcset="@Url.Content("~/img/elements/logo-footer.webp")" type="image/webp"><img src="@Url.Content("~/img/elements/logo-footer.png")" alt="StudyId Logo" width="100%" height="100%"></picture>
+                        </a>
+                    </div>
+                    <div class="footer__grid-layot">
+                        <div class="footer__column">
+                            <div class="footer__title">
+                                ABOUT US
+                            </div>
+                            <ul class="footer__list">
+                                <li>
+                                    <a href="@Url.Action("AboutUs","Home")" class="footer__link">
+                                        About Study-ID
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("AboutUs","Home")#why-study-in-australia" class="footer__link">
+                                        Why Study in Australia
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index","Blog")" class="footer__link">
+                                        News and Events
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("AboutUs","Home")#covid-19-statement" class="footer__link">
+                                        COVID-19 Statement
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="footer__column">
+                            <div class="footer__title">
+                                COURSES
+                            </div>
+                            <ul class="footer__list">
+                                <li>
+                                    <a href="@Url.Action("Business","Home")" class="footer__link">
+                                        Business
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("DigitalMediaAndInformationTechnology","Home")" class="footer__link">
+                                        Digital Media & Information Technology
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("EarlyChildhoodEducationAndCare","Home")" class="footer__link">
+                                        Early Childhood Education & Care
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("English","Home")" class="footer__link">
+                                        English
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="footer__column">
+                            <ul class="footer__list" style="margin-top:45px">
+                                <li>
+                                    <a href="@Url.Action("LeadershipManagement","Home")" class="footer__link">
+                                        Leadership & Management
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("EnvironmentManagementSustainability","Home")" class="footer__link">
+                                        Environment Management & Sustainability
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("HospitalityCulinary","Home")" class="footer__link">
+                                        Hospitality & Culinary
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("MarineHabitatConservationRestoration","Home")" class="footer__link">
+                                        Marine Habitat Conservation And Restoration
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("MarketingCommunications","Home")" class="footer__link">
+                                        Marketing & Communication
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- <div id="popup" aria-hidden="true" class="popup">
+        <div class="popup__wrapper">
+            <div class="popup__content">
+                <button data-close type="button" class="popup__close">Закрыть</button>
+                <div class="popup__text">
+                    Text
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <script src="~/js/all.min.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        function init() {
+            var imgDefer = document.getElementsByTagName('img');
+            for (var i=0; i<imgDefer.length; i++) {
+                if(imgDefer[i].getAttribute('data-src')) {
+                    imgDefer[i].setAttribute('src',imgDefer[i].getAttribute('data-src'));
+                }
+            }
+            var vidDefer = document.getElementsByTagName('iframe');
+            for (var i=0; i<vidDefer.length; i++) {
+                if(vidDefer[i].getAttribute('data-src')) {
+                    vidDefer[i].setAttribute('src',vidDefer[i].getAttribute('data-src'));
+                }
+            }
+
+            var vidObjDefer = document.getElementsByTagName('embed');
+            for (var i=0; i<vidObjDefer.length; i++) {
+                if(vidObjDefer[i].getAttribute('data-src')) {
+                    vidObjDefer[i].setAttribute('src',vidObjDefer[i].getAttribute('data-src'));
+                }
+            }
+        }
+        window.onload = init;
+    </script>
+    <!-- Start of LiveChat (www.livechatinc.com) code -->
+    <script>
+        setTimeout(function() {
+            window.__lc = window.__lc || {};
+            window.__lc.license = 14014902;
+            ;(function(n,t,c){function i(n){return e._h?e._h.apply(null,n):e._q.push(n)}var e={_q:[],_h:null,_v:"2.0",on:function(){i(["on",c.call(arguments)])},once:function(){i(["once",c.call(arguments)])},off:function(){i(["off",c.call(arguments)])},get:function(){if(!e._h)throw new Error("[LiveChatWidget] You can't use getters before load.");return i(["get",c.call(arguments)])},call:function(){i(["call",c.call(arguments)])},init:function(){var n=t.createElement("script");n.async=!0,n.type="text/javascript",n.src="https://cdn.livechatinc.com/tracking.js",t.head.appendChild(n)}};!n.__lc.asyncInit&&e.init(),n.LiveChatWidget=n.LiveChatWidget||e}(window,document,[].slice))
+        }, 5000);
+    </script>
+    <!-- End of LiveChat code -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-46MJ46DDQC"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-46MJ46DDQC');
+    </script>
+</body>
+</html>

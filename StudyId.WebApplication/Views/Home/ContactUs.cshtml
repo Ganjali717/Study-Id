@@ -1,0 +1,178 @@
+﻿@{
+    ViewData["Title"] = "StudyId - Contact us, our team is prepared to help you in your student journey. Have a chat with us!";
+    ViewData["Description"] = "Our team is prepared to help you in your student journey. Have a chat with us!  We are an educational agency that facilitates study in Australia for both foreign and domestic students. We support you through out your journey.";
+    ViewData["Canonical"] = Url.Action("ContactUs", "Home");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="contact">
+    <div class="contact__container">
+        <div class="contact__breadcrumb breadcrumb">
+								<ul class="breadcrumb__list">
+									<li class="breadcrumb__item">
+										<a href="@Url.Action("Index","Home")" class="breadcrumb__link">Home </a>
+									</li>
+									<li class="breadcrumb__item">
+										<span class="breadcrumb__current">
+											Contact Us
+										</span>
+									</li>
+								</ul>
+		</div>
+		<div class="contact__top-head top-head">
+								<a href="" class="top-head__exit">
+									<img src="img/elements/arrow-left.svg" alt="Icon" class="top-head__icon">
+								</a>
+								<h1 class="title contact__title">
+									Contacts Us
+								</h1>
+		</div>
+        <div class="contact__row">
+            <div class="contact__phone-block">
+                <div class="contact__label">
+                    Phone
+                </div>
+                <a href="tel:+610756606516" class="contact__link">+61 (0)7 5660 6516</a>
+            </div>
+            <div class="contact__email-block">
+                <div class="contact__label">
+                    Email
+                </div>
+                <a href="mailto:info@study-id.com" class="contact__link">info@study-id.com</a>
+            </div>
+            <div class="contact__social-block">
+                <div class="contact__label">
+                   
+                </div>
+              @*  <ul class="contact__socials socials">
+                    <li class="socials__item">
+                        <a href="" class="socials__link">
+                            <svg class="socials__icon">
+                                <use href="img/icons/icons.svg#twitter"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="socials__item">
+                        <a href="" class="socials__link">
+                            <svg class="socials__icon">
+                                <use href="img/icons/icons.svg#facebook"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="socials__item">
+                        <a href="" class="socials__link">
+                            <svg class="socials__icon">
+                                <use href="img/icons/icons.svg#instagram"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="socials__item">
+                        <a href="" class="socials__link">
+                            <svg class="socials__icon">
+                                <use href="img/icons/icons.svg#youtube"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="socials__item">
+                        <a href="" class="socials__link">
+                            <svg class="socials__icon">
+                                <use href="img/icons/icons.svg#pinterest"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="socials__item">
+                        <a href="" class="socials__link">
+                            <svg class="socials__icon">
+                                <use href="img/icons/icons.svg#linkedin"></use>
+                            </svg>
+                        </a>
+                    </li>
+                </ul>*@
+            </div>
+        </div>
+        
+
+        <div class="contact__row2">
+			<div class="contact__image-ibg">
+                <picture><source srcset="img/contact/03.webp" type="image/webp"><img src="img/contact/03.jpg" alt="Image"></picture>
+			</div>
+			<div class="contact__form-wrap">
+                <form class="contact__form form" id="contact-form">
+                    <div class="alert alert-danger" v-if="error!=null && error!=''">{{error}}</div>
+                    <div class="form__title">
+                        Request Your Free Online Assessment
+                    </div>
+                    <br/>
+                    <div class="form__items">
+                        <div class="form__item">
+                            <input type="text" name="firstname" data-error="Error" placeholder="First name*" class="input form__input" v-bind:disabled="loader" v-model="$v.firstName.$model" v-bind:class="{'error':$v.firstName.$error }" v-bind:disabled="loader"/>
+                            <div class="error form__error" v-if="$v.firstName.$error && !$v.firstName.required">
+                                This field is required
+                            </div>
+                        </div>
+                        <div class="form__item">
+                            <input type="text" name="lastname" data-error="Error" placeholder="Last name*" class="input form__input" v-bind:disabled="loader" v-model="$v.lastName.$model" v-bind:class="{'error':$v.lastName.$error }" v-bind:disabled="loader"/>
+                            <div class="error form__error" v-if="$v.lastName.$error && !$v.lastName.required">
+                                This field is required
+                            </div>
+                        </div>
+                        <div class="form__item">
+                            <input type="text" name="Email" data-error="Error" placeholder="Email*" class="input form__input" v-bind:disabled="loader" v-model="$v.email.$model" v-bind:class="{'error':$v.email.$error }" v-bind:disabled="loader"/>
+                            <div class="error form__error" v-if="$v.email.$error && !$v.email.required">
+                                This field is required
+                            </div>
+                            <div class="error form__error" v-if="$v.email.$error && !$v.email.email">
+                                Wrong email format
+                            </div>
+                        </div>
+                        <div class="form__item">
+                            <v-select :options="courses" placeholder="Course of Interest" class="form__input" v-bind:disabled="loader" label="title" :reduce="item => item.id" v-model="course"></v-select>
+                        </div>
+                         <div class="form__item">
+                            <div class="form__radiobuttons">
+                                <div class="form__radiobuttons-title">
+                                    Are you currently in Australia?
+                                </div>
+                                <div class="form__radiobuttons-items">
+                                    <div class="checkbox form__chechbox">
+                                        <input id="c_1" data-error="Error" checked class="checkbox__input" type="radio" v-bind:disabled="loader"  v-bind:value="true" name="australianResident" v-model="australianResident">
+                                        <label for="c_1" class="checkbox__label">
+                                            <span class="checkbox__text">Yes</span>
+                                        </label>
+                                    </div>
+                                    <div class="checkbox form__chechbox">
+                                        <input id="c_12" data-error="Error" class="checkbox__input" type="radio" v-bind:disabled="loader"   v-bind:value="false" name="australianResident" v-model="australianResident">
+                                        <label for="c_12" class="checkbox__label">
+                                            <span class="checkbox__text">No</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form__item">
+                            <date-picker v-model="startDate" format="DD/MM/YYYY"
+                                         :disabled-date="disableBeforeToday"
+                                         type="date"
+                                         v-bind:disabled="loader"
+                                         placeholder="When would you like to start? *" input-class="input form__input"></date-picker>
+                        </div>
+                        <div class="alert alert-success" v-if="success">You Application has been submitted successfully. Our team will contact you soon. </div>
+                        <a class="button form__button" style="cursor: pointer" v-bind:disabled="loader" v-on:click="submit();" v-if="id==null">
+                            <div class="spinner-border spinner-border-sm text-white" role="status" v-if="loader">
+                            </div>
+                            <i class="fa-solid fa-floppy-disk" v-if="!loader"></i> Submit
+                        </a>
+                    </div>
+                    <br/>
+                    <div class="form__subtitle">
+                        Our team is prepared to help you in your student journey. Have a chat with us! Fill
+                        your
+                        details below.
+                    </div>
+                  
+                </form>
+			</div>
+		</div>
+	</div>
+</section>
+				
+
